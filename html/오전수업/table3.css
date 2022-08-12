@@ -1,0 +1,23 @@
+
+p{
+    font-size:20pt;
+    font-weight:900;
+    text-align: center;
+}
+table{
+    margin:auto;
+}
+table tr th{
+    border:1px solid black;
+    width:130px;
+    height:20px;
+}
+table tr td{
+    border:1px solid black;
+    width:130px;
+    height:20px;
+    
+}
+.account{
+    background-color: skyblue;
+}
