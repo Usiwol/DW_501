@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            /* 이제부터 contoiner 이름을 가진 idv는 flex야! */
+            display: flex;
+            /* flex-direction : 아이템을 가로가 아닌 세로로 배치 */
+            flex-direction: column;
+             /* justify-content: 컨테이너 안에 있는 아이템 위치조절 */
+             /* space-between, space-around */
+            justify-content: space-around;
+            width: 500px;
+            height: 200px;
+            border: 1px solid black;
+        }
+        .item01{
+            background-color: aqua;
+            /* flex-basis : 아이템 크기 조절 */
+            flex-basis: 30%;
+        }
+        .item02{
+            background-color: blueviolet;
+            flex-basis: 20%;
+        }
+        .item03{
+            background-color: brown;
+            flex-basis: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- flex : 컨테이너(==박스)와 아이템으로 구성됨 -->
+    <div class="container">
+        <div class="item01">item01</div>
+        <div class="item02">item02</div>
+        <div class="item03">item03</div>
+    </div>
+</body>
+</html>
