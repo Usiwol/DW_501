@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // var gugudan = 3;
+    // for(var i=1; i<=9; i++){
+    // var result = gugudan * i; 
+    // console.log(gugudan+'*'+i+'='+result);
+    // }
+
+    // 문제1. for문을 이용해서 구구단3단을 출력하시오.
+    for(var i=1; i<=9; i++){
+        console.log(3+'*'+i+'='+3*i);
+    }
+
+    // 문제2. 1~30까지 출력하기.
+    for(var i=1; i<=30; i++){
+        console.log("i=>"+i);
+    
+        if(i == 10){
+            console.log('멈춰주세요!');
+            break; //for문을 멈춘다.
+        }
+    }
+
+    // 문제3. 1부터 30까지 짝수 개수를 구하시오.
+    // 단, 짝수 개수가 5이상이면 for문을 break 하시오.
+    var count = 0;
+    for(var i=1; i<=30; i++){
+        if(i%2==0){
+            count++;
+        }
+        console.log('count=>'+count);
+        if(count>=5){
+            console.log('멈춰주세요!');
+            break;
+        }
+    }
+    // console.log("짝수개수는 "+count+"개 입니다.");
+
+
+</script>
+</html>
