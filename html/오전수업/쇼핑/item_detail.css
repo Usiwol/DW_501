@@ -79,7 +79,7 @@
     width: 182px;
     margin: 3.5px;
     padding: 3px;
-    height: 200px;
+    height: 100px;
     border: 1px solid rgb(230,230,230);
 }
 .item_pay_name{
@@ -87,6 +87,8 @@
 }
 .item_among{
     display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .item_among button{
     width: 30px;
@@ -107,4 +109,142 @@
 #am ::-webkit-inner-spin-button, #am::-webkit-outer-spin-button{
     -webkit-appearance: none;
     margin: 0;
+}
+
+/* 사이드바 */
+#item_pay_money{
+    margin-top: 200px;
+    width: 100%;
+}
+#item_pay_money span{
+    /* inline-blick : 너비 높이를 가질 수 있다 */
+    display: inline-block;
+
+
+}
+.total_money{
+    width: 182px;
+    margin: 0 auto;
+    height: 30px;
+    color: red;
+}
+.total{
+    width: 60px;
+    line-height: 30px;
+}
+.pay_money{
+    width: 116.4px;
+    line-height: 30px;
+    text-align: right;
+    font-weight: 700;
+}
+.line_deco{
+    width: 182px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+.coupon{
+    width: 182px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-size: 10px;
+}
+.coupon_change{
+    width: 64px;
+}
+.coupon_change button{
+    width: 50px;
+    height: 25px;
+    font-size: 10px;
+    padding: 0;
+    margin-left: 14px;
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+    position: relative;
+    /*  위로 올리려면 숫자앞에 -(마이너스) 붙이기 */
+    top: -7px;
+}
+.coupon_change button{
+    cursor: pointer;
+}
+.cart_buy{
+    width: 182px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.cart_buy a{
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid red;
+}
+#cart{
+    color: red;
+    height: 50px;
+    line-height: 50px;
+}
+#buy{
+    color: white;
+    height: 50px;
+    line-height: 50px;
+    background-color: red;
+}
+#gift{
+    color: white;
+    height: 50px;
+    line-height: 50px;
+    background-color: red;
+    width: 36px;
+    text-align: center;
+}
+#detail_view{
+    width: 800px;
+    height: auto;
+    margin-top: 50px;
+}
+.item_img{
+    width: 800px;
+    height: 300px;
+}
+.item_img img{
+    max-width: 800px;
+    height: 300px;
+}
+.item_detail_img{
+    width: 800px;
+    height: 600px;
+}
+.delivery_img{
+    width: 100%;
+    height: 200px;
+}
+.exchange_return{
+    width: 100%;
+    height: 400px;
+}
+.item_info_post{
+    width: 100%;
+    height: 500px;
+}
+.info_post tr td{
+    border: 1px solid rgb(220, 220, 220);
+}
+.info_post tr:nth-child(1) td{
+    border-top: 2px solid rgb(150, 150, 150);
+}
+.info_post tr:nth-child(8) td{
+    border-bottom: 2px solid rgb(150, 150, 150);
+}
+.title{
+    width: 150px;
+    padding-left: 15px;
+    padding-right: 10px;
+    font-size: 13px;
+    background-color: rgb(240, 240, 240);
+}
+.content{
+    width: 625px;
+    padding-left: 10px;
+    height: 40px;
 }
