@@ -1,0 +1,39 @@
+body{
+    margin: 0 auto;
+    padding: 0;
+}
+#hanacare{
+    width: 100%;
+    height: auto;
+}
+#header_wrap{
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    background-color: yellow;
+}
+#login_wrap{
+    width: 1200px;
+    height: 800px;
+    display: flex;
+}
+#menu{
+    width: 1200px;
+}
+.img_wrap{
+    max-width: 200px;
+    margin-right: 100px;
+}
+.img_wrap img{
+    max-width: 200px;
+    margin-right: 100px;
+}
+#main_wrap{
+    width: 100%;
+    background-color: aquamarine;
+}
+#footer_wrap{
+    width: 1200px;
+    margin: 0 auto;
+    background-color: cadetblue;
+}
