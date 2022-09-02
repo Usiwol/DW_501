@@ -1,0 +1,41 @@
+#box{
+    border: 1px solid red;
+    width: 800px;
+    height: 400px;
+    margin-top: 50px;
+    /* body 태그 기준 */
+    /* position: relative; */
+    top: 50px;
+    left: 100px;
+}
+#box1{
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    position: absolute;
+    top: 80px;
+    left: 200px;
+}
+#box2{
+    width: 300px;
+    height: 150px;
+    background-color: gray;
+    /* box 태그 기준 */
+    position: relative;
+    left: 10px;
+    top: 50px;
+}
+#box3{
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    position: relative;
+}
+#box4{
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    /* body 태그 기준 */
+    position: absolute;
+    top: 10px;
+}
