@@ -1,0 +1,58 @@
+#menu{
+    width: 1000px;
+    height: 80px;
+    position: relative;
+}
+#menu ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+#main_menu{
+    width: 1000px;
+    height: 80px;
+    position: relative;
+}
+#main_menu>li{
+    width: 200px;
+    height: 80px;
+    float: left;
+    line-height: 80px;
+    text-align: center;
+    background: pink;
+    position: relative;
+}
+/* sub 메뉴 안보이게 하기 */
+#main_menu .sub{
+    display: none;
+    -webkit-transition: all 1s;
+    /* transition-property: height; 
+    transition: 2s;*/
+}
+#main_menu .sub li{
+    -webkit-transition: height 0.5s;
+}
+#main_menu:hover .sub{
+    display: block;
+    background: lightgoldenrodyellow;
+    height: 240px;
+    /* transition-property: height;
+    transition: 2s;  */
+}
+
+
+/*
+< sub 메뉴 안보이게 하기; 
+    메인페이지 만들때 사용한 방법?> 
+#main_menu .sub li{ 
+    width: 0;
+    height: 0;
+    line-height: 0;
+    position: absolute;
+    top: -10px;
+}
+#main_menu .sub{
+    opacity: 0;
+}
+*/
