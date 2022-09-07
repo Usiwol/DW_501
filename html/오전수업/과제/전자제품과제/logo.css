@@ -1,0 +1,66 @@
+body{
+    margin: 0 auto;
+    padding: 0;
+}
+#container{
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+}
+#header_wrap{
+    margin: 0 auto;
+    width: 1800px;
+    height: 80px;
+    display: flex;
+}
+#logo_wrap{
+    width: 300px;
+    height: 80px;
+    background-color: orangered;
+}
+#image_wrap{
+    width: 1500px;
+    height: 80px;
+    background-color: green;
+}
+#main_wrap{
+    margin: 0 auto;
+    width: 1800px;
+    height: 750px;
+    display: flex;
+}
+#menu_wrap{
+    width: 300px;
+    height: 750px;
+    background-color: blue;
+}
+#id_wrap{
+    margin: 0 auto;
+    width: 250px;
+    height: 250px;
+    margin-top: 20px; 
+    text-align: left;  
+}
+.idpw input{
+    width: 170px;
+    height: 20px;
+    margin-bottom: 10px;
+}
+.bt input{
+    width: 250px;
+}
+.login{
+    display: flex;
+    justify-content: space-between;
+}
+#bar_wrap{
+    margin: 0 auto;
+    width: 250px;
+    height: 500px;
+}
+#mainimg_wrap{
+    width: 1500px;
+    height: 750px;
+    background-color: rgb(250, 221, 155);
+}
