@@ -49,10 +49,23 @@ body{
 }
 .bt input{
     width: 250px;
+    text-align: center;
+    font-size: 15pt;
+    border: 0;
+    border-radius: 3px;
+    background-color: rgb(96, 228, 96);
+    color: white;
+}
+.ip input{
+    right: 25px;
 }
 .login{
     display: flex;
     justify-content: space-between;
+}
+.login a{
+    color: black;
+    text-decoration: none;
 }
 #bar_wrap{
     margin: 0 auto;
