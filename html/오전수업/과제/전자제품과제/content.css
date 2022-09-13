@@ -11,13 +11,13 @@ body{
 #barwrap{
     margin: 0 auto;
     width: 1800px;
-    height: 820px;
+    height: 700px;
     display: flex;
 }
 #content_wrap{
     margin: 0 auto;
     width: 350px;
-    height: 820px;
+    height: 700px;
 }
 .logo{
     width: 350px;
@@ -43,7 +43,7 @@ body{
 }
 .logoutul li{
     font-size: 15pt;
-    font-weight: 300;
+    font-weight: 500;
 }
 .logout input{
     width: 150px;
@@ -52,7 +52,7 @@ body{
 .content_list{
     margin: 0 auto;
     width: 300px;
-    height: 520px;
+    height: 300px;
 }
 .content_list ul{
     padding: 0;
@@ -61,7 +61,7 @@ body{
 .list li{
     padding-bottom: 4px;
     font-size: 15pt;
-    font-weight: 300;
+    font-weight: 500;
 }
 .list li a{
     color: black;
@@ -87,12 +87,48 @@ body{
     font-size: 13pt;
     text-align: left;
 }
+.item a{
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+}
 .item_img{
     width: 400px;
     height: 420px;
     margin-bottom: 12px;
+    overflow: hidden;
 }
 .item_img img{
     width: 400px;
     height: 420px;
+    transition: 0.5s;
 }
+.item_img:hover img{
+    transform: scale(1.4);
+}
+#footwrap{
+    margin: 0 auto;
+    width: 1800px;
+    height: 150px;
+}
+#foot{
+    margin: 0 auto;
+    display: flex;
+    margin-top: 20px;
+}
+#foot ul{
+    list-style-type: none;
+    color: rgb(179, 177, 177);
+}
+#foot ul li{
+    font-size: 13px;
+}
+#cs_info{
+    margin-left: 550px;
+    margin-right: 220px;
+}
+#add_info ul li{
+    margin-bottom: 5px;
+}
+

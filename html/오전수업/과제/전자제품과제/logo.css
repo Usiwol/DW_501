@@ -34,12 +34,12 @@ body{
 #main_wrap{
     margin: 0 auto;
     width: 1800px;
-    height: 700px;
+    height: 600px;
     display: flex;
 }
 #menu_wrap{
     width: 350px;
-    height: 720px;
+    height: 550px;
 }
 #id_wrap{
     margin: 0 auto;
@@ -71,6 +71,9 @@ body{
     margin-top: 7px;
     background-color: white;
 }
+.bt  input:hover{
+    cursor: pointer;
+}
 .ip input{
     right: 25px;
 }
@@ -88,7 +91,7 @@ body{
 #bar_wrap{
     margin: 0 auto;
     width: 300px;
-    height: 520px;
+    height: 350px;
 }
 #content ul{
     padding: 0;
@@ -97,7 +100,7 @@ body{
 .list li{
     padding-bottom: 4px;
     font-size: 15pt;
-    font-weight: 300;
+    font-weight: 500;
 }
 .list li a{
     color: black;
@@ -105,7 +108,7 @@ body{
 }
 #mainimg_wrap{
     width: 1450px;
-    height: 720px;
+    height: 550px;
 }
 .mainimg{
     margin: 0 auto;
@@ -114,7 +117,30 @@ body{
     text-align: center;
 }
 .mainimg img{
-    margin-top: 100px;
+    margin-top: 30px;
     max-width: 1000px;
     max-height: 500px;
+}
+#footwrap{
+    margin: 0 auto;
+    width: 1800px;
+    height: 150px;
+}
+#foot{
+    margin: 0 auto;
+    display: flex;
+}
+#foot ul{
+    list-style-type: none;
+    color: rgb(179, 177, 177);
+}
+#foot ul li{
+    font-size: 13px;
+}
+#cs_info{
+    margin-left: 550px;
+    margin-right: 220px;
+}
+#add_info ul li{
+    margin-bottom: 5px;
 }
