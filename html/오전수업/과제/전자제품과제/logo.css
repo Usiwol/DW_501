@@ -106,6 +106,9 @@ body{
     color: black;
     text-decoration: none;
 }
+.list li a:hover{
+    font-weight: 700;
+}
 #mainimg_wrap{
     width: 1450px;
     height: 550px;

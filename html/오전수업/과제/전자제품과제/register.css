@@ -31,16 +31,27 @@ body{
     width: 1450px;
     height: 120px;
 }
+h2{
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+    text-shadow: 4px 2px 2px gray;
+}
+hr{
+    width: 640px;
+    margin-top: 20px;
+}
 #main_wrap{
     margin: 0 auto;
+    margin-left: 150px;
     width: 1800px;
     height: 520px;
 }
 .register_wrap{
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 30px;
     width: 600px;
-    height: 350px;
+    height: 300px;
     font-size: 20pt;
     font-weight: 400;
     text-align: right;
@@ -54,6 +65,7 @@ body{
 }
 .button{
     margin: 0 auto;
+    margin-top: 30px;
     width: 600px;
     height: 50px;
 }
@@ -61,9 +73,11 @@ body{
     width: 620px;
     height: 50px;
     border-radius: 5px;
-    background-color: white;
+    background-color: rgb(253, 245, 245);
     font-size: 20pt;
     font-weight: 200;
+    text-shadow: 2px 2px 2px gray;
+    cursor: pointer;
 }
 #footwrap{
     margin: 0 auto;
@@ -73,7 +87,7 @@ body{
 #foot{
     margin: 0 auto;
     display: flex;
-    margin-top: 30px;
+    margin-top: 55px;
 }
 #foot ul{
     list-style-type: none;

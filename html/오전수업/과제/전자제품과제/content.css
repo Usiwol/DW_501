@@ -74,13 +74,21 @@ body{
 #item_wrap{
     margin: 0 auto;
     width: 1450px;
-    height: 500px;
+    height: 680px;
+    margin-top: 40px;
+}
+.cloth_wrap{
+    margin: 0 auto;
+    width: 1450px;
     display: flex;
-    margin-top: 150px;
+}
+.c1{
+    margin: 0 auto;
+    margin-bottom: 90px;
 }
 .item{
-    width: 380px;
-    height: 500px;
+    width: 300px;
+    height: 260px;
     padding: 0 10px 0 10px;
     text-align: center;
     margin-left: 50px;
@@ -90,22 +98,29 @@ body{
 .item a{
     text-decoration: none;
     color: black;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
 }
+.item a:hover{
+    font-weight: bold;
+}
+hr{
+    margin-bottom: 0;
+    margin-top: 5px;
+}
 .item_img{
-    width: 400px;
-    height: 420px;
+    width: 280px;
+    height: 240px;
     margin-bottom: 12px;
     overflow: hidden;
 }
 .item_img img{
-    width: 400px;
-    height: 420px;
+    width: 280px;
+    height: 240px;
     transition: 0.5s;
 }
 .item_img:hover img{
-    transform: scale(1.4);
+    transform: scale(1.1);
 }
 #footwrap{
     margin: 0 auto;
