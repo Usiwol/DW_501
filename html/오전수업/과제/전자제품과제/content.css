@@ -45,6 +45,9 @@ body{
     font-size: 15pt;
     font-weight: 500;
 }
+.logoutul li:hover{
+    font-weight: 700;
+}
 .logout input{
     width: 150px;
     height: 25px;
@@ -66,6 +69,9 @@ body{
 .list li a{
     color: black;
     text-decoration: none;
+}
+.list li a:hover{
+    font-weight: 700;
 }
 #main_wrap{
     margin: 0 auto;

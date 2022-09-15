@@ -31,21 +31,22 @@ body{
     width: 1450px;
     height: 120px;
 }
+
+#main_wrap{
+    margin: 0 auto;
+    /* margin-left: 150px; */
+    width: 1800px;
+    height: 520px;
+}
 h2{
     text-align: center;
     font-weight: 500;
-    font-size: 30px;
+    font-size: 33px;
     text-shadow: 4px 2px 2px gray;
 }
 hr{
     width: 640px;
     margin-top: 20px;
-}
-#main_wrap{
-    margin: 0 auto;
-    margin-left: 150px;
-    width: 1800px;
-    height: 520px;
 }
 .register_wrap{
     margin: 0 auto;
@@ -57,6 +58,7 @@ hr{
     text-align: right;
 }
 .register_wrap input{
+    margin: 0 auto;
     width: 280px;
     height: 30px;
     border-radius: 5px;
@@ -73,10 +75,12 @@ hr{
     width: 620px;
     height: 50px;
     border-radius: 5px;
-    background-color: rgb(253, 245, 245);
     font-size: 20pt;
     font-weight: 200;
-    text-shadow: 2px 2px 2px gray;
+    text-shadow: 2px 2px 2px gray;   
+}
+.button input:hover{
+    background-color: rgb(248, 242, 242);
     cursor: pointer;
 }
 #footwrap{
