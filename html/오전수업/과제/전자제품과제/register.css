@@ -64,6 +64,7 @@ hr{
     border-radius: 5px;
     font-size: 18pt;
     margin-bottom: 10px;
+    padding-left: 10px;
 }
 .button{
     margin: 0 auto;
@@ -91,7 +92,7 @@ hr{
 #foot{
     margin: 0 auto;
     display: flex;
-    margin-top: 55px;
+    margin-top: 52px;
 }
 #foot ul{
     list-style-type: none;
