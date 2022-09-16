@@ -83,6 +83,11 @@ document.write('주차요금 : '+price + '원');
 // 145를 이용히여 조건식의 결과가 거짓이 나오게 만들기
 // 만약 175를 입력한다면 조건식
 
+var tall = parseInt(prompt("키를 입력하세요"));
+if(tall>=150&&tall<=190) document.write("탑승가능");
+else document.write("탑승불가능");
+
+
 
 // 인적사항 - 직업이 학생일 경우 현재 재학중 학교이름 작성
 var name = prompt("이름");
@@ -93,10 +98,10 @@ var school;
 if(job=="학생"){
     school = prompt("재학중인 학교이름");
 }
-
+x
 
 // 핸드폰번호 입력 - 없이 입력
-var 폰 = '01012345678';
+var 폰 = '010-1234-5678';
 if(폰.indexOf('-') != -1){
     alert('- 없이 입력하세요');
 }
@@ -192,6 +197,7 @@ switch(select){
             document.write('비김');
     }
 */
+
     // 문제 4.
     // 점수 입력받아서 90점 이상이면 'A등급', 80점 이상이면 'B등급'
     // 70점 이상이면 'C등급', 나머지는 'F등급' 이라고 출력하기
@@ -210,11 +216,6 @@ switch(select){
         default:
             document.write('F등급');
     }
-    //어렵뜨아
-
-
-
-
 
 </script>
 </head>
