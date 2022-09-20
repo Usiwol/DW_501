@@ -59,10 +59,10 @@ function generateLottoNumbers(size){
         var usrLotto=[]; //로또 번호 배열 생성
         
 
-        // for(i=1;i<7;i++){
-        //     var yourNum=parseInt(prompt("1~45이하의 정수 6번 입력하세요 "+i+"번째 입력입니다."));
-        //     usrLotto.push(yourNum); //push로 배열에 각 값 입력
-        // }
+         for(i=1;i<7;i++){
+             var yourNum=parseInt(prompt("1~45이하의 정수 6번 입력하세요 "+i+"번째 입력입니다."));
+             usrLotto.push(yourNum); //push로 배열에 각 값 입력
+         }
 
         for(var i=0; i<6;i++){
             for (var j=0;j<6;j++){
@@ -158,24 +158,33 @@ function generateLottoNumbers(size){
 
         var count=0;
 
-        for(i=0;i<6;i++){
-            for(j=0;j<6;j++){
-                if(comLotto[i]==usrLotto[j]){
-                    count++;
-                    document.write("이번주 로또 당첨 번호 중 ["+(i+1)+"번] 이 일치하였습니다.<br>");
-                    break;
-                }
-            }
-        }
+        // for(i=0;i<6;i++){
+        //     for(j=0;j<6;j++){
+        //         if(comLotto[i]==usrLotto[j]){
+        //             count++;
+        //             document.write("이번주 로또 당첨 번호 중 ["+(i+1)+"번] 이 일치하였습니다.<br>");
+        //             break;
+        //         }
+        //     }
+        // }
         
-        if(count==0){
-            document.write("꽝! 다음기회에.");
+        if(count==6){
+            document.write("축하드립니다 ! 1등 당첨되었습니다. ");
         }
-        else if(count==6){
-            document.write("축하드립니다 ! 당첨되었습니다. ");
+        else if(count==5){
+            document.write("축하드립니다 ! 2등 당첨되었습니다. ");
+        }
+        else if(count==4){
+            document.write("축하드립니다 ! 3등 당첨되었습니다. ");
+        }
+        else if(count==3){
+            document.write("축하드립니다 ! 4등 당첨되었습니다. ");
+        }
+        else if(count==2){
+            document.write("축하드립니다 ! 5등 당첨되었습니다. ");
         }
         else{
-            document.write("축하드립니다! 총"+count+"개 일치하였습니다.");
+            document.write("낙첨! 다음기회에.");
         }
 
     </script>
