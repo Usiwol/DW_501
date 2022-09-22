@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image_board.html</title>
+<link rel="stylesheet" type="text/css" href="image_board.css">
+</head>
+<body>
+    
+    <div id="image_mask">
+        <div id="image_wrap">
+            <div class="image_title">
+                <div class="title_wrap">
+                    <b>갤러리</b>
+                </div>
+            </div>
+            <div id="image_list">
+                <div class="line_wrap">
+                    <div class="cell cell_one">
+                        <div style="background: url(c1.jpg) no-repeat center center; background-size: cover;" class="img_area">
+                            <a href="gallery_view.html?name=c1&type=jpg&title=츄르"></a>
+                        </div>
+                        <div class="title"><a href="gallery_view.html?name=c1&type=jpg&title=츄르">츄르</a></div>
+                    </div>
+                    <div class="cell cell_two">
+                        <div style="background: url(c2.jpg) no-repeat center center; background-size: cover;" class="img_area">
+                            <a href="gallery_view.html?name=c2&type=jpg&title=사막고양이"></a>
+                        </div>
+                        <div class="title"><a href="gallery_view.html?name=c2&type=jpg&title=사막고양이">사막고양이</a></div>
+                    </div>
+                    <div class="cell cell_three">
+                        <div style="background: url(c3.jpg) no-repeat center center; background-size: cover;" class="img_area">        
+                            <a href="gallery_view.html?name=c3&type=jpg&title=아기고양이"></a>
+                        </div>
+                        <div class="title"><a href="gallery_view.html?name=c3&type=jpg&title=아기고양이">아기고양이</a></div>
+                    </div>
+
+                </div>
+                <div class="line_wrap">
+                    <div class="cell cell_one">
+                        <div style="background: url(c4.jpg) no-repeat center center; background-size: cover;" class="img_area">
+                            <a href="gallery_view.html?name=c4&type=jpg&title=그루밍"></a>
+                        </div>
+                        <div class="title"><a href="gallery_view.html?name=c4&type=jpg&title=그루밍">그루밍</a></div>
+                    </div>
+                    <div class="cell cell_two">
+                        <div style="background: url(c5.jpg) no-repeat center center; background-size: cover;" class="img_area">
+                            <a href="gallery_view.html?name=c5&type=jpg&title=목욕한아기고양이"></a>
+                        </div>
+                        <div class="title"><a href="gallery_view.html?name=c5&type=jpg&title=목욕한아기고양이">목욕한아기고양이</a></div>
+                    </div>
+                    <div class="cell cell_three">
+                        <div style="background: url(c6.jpg) no-repeat center center; background-size: cover;" class="img_area">
+                            <a href="gallery_view.html?name=c6&type=jpg&title=잠자는아기고양이"></a>
+                        </div>
+                        <div class="title"><a href="gallery_view.html?name=c6&type=jpg&title=잠자는아기고양이">잠자는아기고양이</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <style>
+        .a{
+            width: 400px;
+            overflow: hidden;
+        }
+        .a img{
+            width: 400px;
+            transition: 0.5s;
+        }
+        .a:hover img{
+            transform: scale(1.4);
+
+        }
+    </style>
+    <div class="a">
+        <img src="c1.jpg">
+    </div>
+
+
+</body>
+</html>

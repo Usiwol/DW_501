@@ -1,0 +1,95 @@
+table td{
+    border: 1px solid black;
+    width: 150px;
+    height: 50px;
+}
+table{
+    margin:auto;
+}
+#login{
+    text-align: right; 
+}
+.home{
+    border: none;
+    border-left: 1px;
+    border-right: 1px;
+}
+#home_bar{
+    border: none;
+    text-align: center;
+}
+/* 메뉴에 마우스 오버시 해당 메뉴의 색은 #999, 글자 굵게 변경 */
+.home:hover{
+    background: #999;
+    font-weight: bold;
+}
+#menu{
+    text-align: center;
+    height:200px;
+    line-height: 50px;
+}
+#menu ul{
+    list-style: none;
+    padding-left: 0px;
+}
+/* 서브메뉴 의 배경색은 rgb(0,100,204) , 글자색은 white 굵게, 글자크기는 15pt */
+.sub{
+    background-color: rgb(0,100,204);
+    color: white;
+    font-weight: 15pt; 
+}
+/* 서브메뉴에 마우스 오버시 해당 메뉴만 배경색 : rgb(178,235,244) , 글자색 검정 변경 */
+.m1:hover{
+    background-color: rgb(178,235,244);
+    color: black;
+}
+#news{
+    height:150px;
+}
+/* 이미지에 마우스 오버시 투명도 0.4 적용 */
+.image{
+    margin: 0px auto;
+    padding: 30px;
+}
+.image:hover{
+    opacity: 0.4; 
+}
+#news ul{
+    list-style: none;
+    padding-left: 0px;
+}
+#news ul li{
+    float: left;
+}
+#news td{
+    vertical-align: top;
+}
+
+.item{
+    border: 1px solid black;
+    margin-left: 20px;
+}
+.item2{
+    width: 530px;
+    border: 1px solid black;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    padding-left: 20px;
+}
+.item2:hover{
+    border: 1px solid black
+}
+
+/* 
+#news ul{
+    list-style: none;
+    padding-left: 0px;
+}
+#news ul li{
+    float: left;
+    margin-left: 20px;
+}
+#news td{
+    vertical-align: top;
+*/

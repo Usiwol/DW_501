@@ -1,0 +1,13 @@
+
+/*
+.image{
+    float: left;
+}
+*/
+
+#box{
+    display: flex;
+    width: 600px;
+    /* 배치하는 방식 */
+    flex-wrap: wrap;
+}
