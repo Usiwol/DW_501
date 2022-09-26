@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>b i n g  o</title>
+<link rel="stylesheet" type="text/css" href="bingo.css">
+</head>
+<body onload="textCheck()">
+    <div id="container">
+        <div class="title">
+            <h2> b i n g o </h2>
+        </div>
+        <div class="bingo_wrap">
+            <div class="bingo">
+                <div class="bgn" id="num1"></div>
+                <div class="bgn" id="num2"></div>
+                <div class="bgn" id="num3"></div>
+                <div class="bgn" id="num4"></div>
+                <div class="bgn" id="num5"></div>
+            </div>
+            <div class="bingo">
+                <div class="bgn" id="num6"></div>
+                <div class="bgn" id="num7"></div>
+                <div class="bgn" id="num8"></div>
+                <div class="bgn" id="num9"></div>
+                <div class="bgn" id="num10"></div>
+            </div>
+            <div class="bingo">
+                <div class="bgn" id="num11"></div>
+                <div class="bgn" id="num12"></div>
+                <div class="bgn" id="num13"></div>
+                <div class="bgn" id="num14"></div>
+                <div class="bgn" id="num15"></div>
+            </div>
+            <div class="bingo">
+                <div class="bgn" id="num16"></div>
+                <div class="bgn" id="num17"></div>
+                <div class="bgn" id="num18"></div>
+                <div class="bgn" id="num19"></div>
+                <div class="bgn" id="num20"></div>
+            </div>
+            <div class="bingo">
+                <div class="bgn" id="num21"></div>
+                <div class="bgn" id="num22"></div>
+                <div class="bgn" id="num23"></div>
+                <div class="bgn" id="num24"></div>
+                <div class="bgn" id="num25"></div>
+            </div>
+        </div>
+        <div class="footer_wrap">
+            <div class="result" id="res"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+
+    function textCheck(){
+        
+        for(var i=1; i<26; i++){
+            var go = document.getElementById("num"+ i);
+            var bin = Math.floor(Math.random()*100)+1;
+            go.innerHTML= bin;
+        }
+    
+    }
+    
+
+</script>
+</html>
