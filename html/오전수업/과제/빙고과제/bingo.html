@@ -50,21 +50,23 @@
             </div>
         </div>
         <div class="footer_wrap">
-            <div class="result" id="res"></div>
+            <div class="result" id="res">빙고!</div>
+            <div>
+                <input type="button" value="초기화">
+            </div>
         </div>
     </div>
 </body>
 <script type="text/javascript">
 
-    function textCheck(){
-        
+    function textCheck(){  
         for(var i=1; i<26; i++){
             var go = document.getElementById("num"+ i);
             var bin = Math.floor(Math.random()*100)+1;
             go.innerHTML= bin;
         }
-    
     }
+    
 
 </script>
 </html>
