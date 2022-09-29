@@ -20,7 +20,7 @@ window.onload = function(){
     for(var i=0; i<20; i++){
         table += "<tr>";
         for(var k=0; k<20; k++){
-            // 폭탄표시
+            // 폭탄표시 1은 폭탄
             if(board[i*20+k] == 1)
                 table += '<td><img src="../../image/boom.png"</td>';
             else
