@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0819_1.html</title>
+    <style>
+        .menu_box{
+            width: 400px;
+            height: 500px;
+            background-color: #efefef;
+            margin: 100px auto;
+            padding: 30px;
+        }
+        h2{
+            text-align: center;
+        }
+        select{
+            width: 100%;
+            height: 40px;
+        }
+        input[type=number]{
+            width: 97%;
+            height: 40px;
+        }
+        button{
+            width: 100%;
+            height: 30px;
+            background-color: blue;
+            color: white;
+            border: 0;
+            border-radius: 5px;
+        }
+        button:hover{
+            background-color: lightgrey;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .input_box{
+            margin-bottom: 20px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="menu_box">
+        <h2>빽다방 메뉴</h2>
+        <div class="input_box">
+            <select>
+                <option>메뉴를 선택해주세요.</option>
+                <option>앗!메리카노</option>
+                <option>원조커피</option>
+            </select>
+        </div>    
+        <div class="input_box">
+            ICED : <input type="radio" name="I&H">
+            HOT : <input type="radio" name="I&H">
+        </div>
+        <div class="input_box">
+            L size : <input type="radio" name="size">
+            M size : <input type="radio" name="size">
+        </div>
+        <div class="input_box">
+            <input type="number" placeholder="수량을 입력해주세요">
+        </div>
+        <div class="input_box">
+            <textarea cols="50" rows="10" placeholder="추가 사항이 있으면 적어주세요."></textarea>
+        </div>
+        <div class="input_box">
+            <button>주문 완료</button>
+        </div>
+    </div>
+</body>
+</html>
