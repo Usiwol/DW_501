@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+/*
+        var i=1; //초기값
+        // while에서는 { }(중괄호) 꼭 넣기
+        while(i<=10){ //조건식
+            document.write(i+ ' ');
+            i++; // 증감식
+        }
+        // for문 에서는 {}(중괄호) 생략 가능
+        for(var k=1; k<=10; k++)//초기값, 조건식, 증감식
+        document.write(k + ' ');
+
+        //while문과 for문
+        //이중 반복문 구현시
+        var a=1, b=1;
+        while(a<=3){
+            b = 1; //=> 12번 실행시키기 위해 
+            while(b<=4){
+                document.write("while <br>");
+                b++;
+            }
+            a++;
+        }
+        
+        for(var c=1; c<=3; c++){
+            for(var d=1; d<=4; d++)
+            document.write('for <br>');
+        }
+*/
+        // for(초기값 ; 조건식 ; 증감식)
+        // for( ; 조건식; 증감식)
+        // for( ; ; ) ==> 무한루프
+
+        for(var i=1; i<=25; i++){
+            document.write(i + '');
+            if(i%5==0) document.write('<br>');
+        }
+
+        // while, for 동작순서
+        // 초기값 -> 조건식 비교 -> 참이라면 -> 반복내용 -> 증감식
+        // -> 조건식 비교 -> 참이라면 -> 반복내용 -> 증감식
+        // -> 조건식 비교 -> 거짓이라면 -> 반복문 종료
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
