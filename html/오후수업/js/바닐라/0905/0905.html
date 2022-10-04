@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //배열 & for문
+    var array = [3,10,8];
+    //배열 0번째 출력
+    console.log(array[0]); //방법1
+    var item = array[0]; //방법2
+    console.log(item);
+
+    var result = 0;
+    var item1 = array[1]; //10
+    var item2 = array[2]; //8
+    result = item1 + item2;
+
+    //for문을 이용해서 배열안에 있는 숫자를 모두 더하시오.
+    var sum = 0;
+    for(var i=0; i<array.length; i++){
+        //console.log(array[i]);
+        sum = sum + array[i];
+    }
+    console.log(sum);
+
+    var array1 = [2,2,9,2,5];
+    //문제1. for문을 이용해서 array1에 2가 몇번 들어 있는지 카운팅 하시오!
+    var count=0; 
+        //i=0 이유: 배열 시작이 0부터 이니깐!
+    for(var i=0; i<array1.length; i++){
+        var x = array1[i];
+        if(x == 2){
+        count++;
+        } //{} 생략가능 단, 로직이 하나 일 때
+    }
+    console.log('문제1번 => ' +count);
+    //console.log('2의 개수는'+count+'개 입니다.');
+    
+
+    //문제2. for문을 이용해서 array1에 있는 모든 숫자를 더하는데,
+    //더한 숫자가 10이상이면 break 하시오.
+    var sum = 0;
+    for(var i=0; i<array1.length; i++){
+        sum = sum + array1[i];
+        if(sum >= 10 ){
+            console.log('문제 2번');
+            break; //for문이 더이상 실행하지 않고 바로 중단!
+        }
+    }
+    //문제3. (난이도상승)for문을 이용해서 array1에 있는 숫자 중 최댓값을 구하시오.
+    var max = 0;
+    for(var i=0; i<array1.length; i++){
+        var x = array1[i];
+        if(max < x){
+            max = x;
+        }
+    }console.log(max);
+
+    //문제0. for문을 이용해서 배열안에 있는 숫자 출력하기
+    for(var i=0; i<array1.length; i++){
+        console.log(array1[i]);
+    }
+
+
+    //포인트: for문 안에 for문을 사용할 수 있다!
+    //'이중for문' 도 있다.
+    //for(var i=0; i<5; i++){ //outer - for
+    //    for(var j=0; j<3; J++){ //inner - for
+    //    //inner - for문은 몇번 돌까? 정답; 3
+    //    }
+    //}
+
+    for(var i=2; i<=9; i++){ //outer - for
+        console.log('구구단을 시작합니다.'+i+"단 부터 시작!");
+        for(var j=1; j<=9; j++){ //inner - for
+            console.log(i+'*'+j+' = ' + (i*j));
+        }
+        console.log(i+'단 종료 ');
+    }
+
+    //문제1. 2단~5단까지만 구구단을 완성하시오.
+    for(var i=2; i<=5; i++){
+        console.log('구구단을 시작합니다.'+i+"단 부터 시작!");
+        for(var j=1; j<=9; j++){
+            console.log(i+'*'+j+' = ' + (i*j));
+        }
+    }console.log(i+'단 종료 ')
+
+</script>
+</html>
