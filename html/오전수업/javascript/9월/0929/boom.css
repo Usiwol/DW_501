@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* boom.css */
+
+body,
+div,
+table,
+p,
+ul{
+    margin: 0;
+    padding: 0;
+    background: #778899;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+#wrap{
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+table{
+    width: 1000px;
+    border-spacing: 0;
+}
+table tr td{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+img{
+    /* 폭탄이미지 안보이게 투명도 주기 */
+    /* opacity: 0; */
+    /* 폭탄이미지 안보이게 하기 2 */
+    /* display: none; */
+    width: 40px;
+    height: 40px;
+}
