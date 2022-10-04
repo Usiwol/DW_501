@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        // window : document, location, history, screen, navigator
+
+        // class 사용시 상황에 맞게 사용하기
+        // -> 정적으로 가져옴
+        /*
+        document.getElementById("num");  // id
+        document.getElementsByClassName("클래스명"); // class
+        document.getElementByName("name명") // name
+        documetn.getElementByTagName("태그명") // 태그이름
+
+        // -> 동적으로 가져옴
+        document.querySelector("#num"); // id
+        document.querySelector(".클래스명"); // class -> 페이지 내 하나인 경우
+        document.querySelectorAll(".클래스명"); // class -> 여러태그에 걸쳐 사용중인 경우
+        document.querySelectorAll("태그명"); // 태그이름
+        document.querySelectorAll("[name명]"); // name
+
+        // 크기변경 X -> 정적 할당
+        // 크기변경 O -> 동적 할당
+        */
+        function data_push(){
+/*            
+            // input 태그 가져오기
+            var number = document.getElementById("num");
+            var val =  number.value; // input 태그에 입력값 가져오기
+            //alert(val);
+
+            // id가 result인 div 태그 가져오기
+            var res = document.getElementById("result");
+            res.innerHTML = val;//div태그 안에 값 넣어주기
+*/
+
+            // 문제 1. 
+            // 입력값이 짝수인지 홀수인지 출력하시오.
+
+            // input 태그 가져오기
+            var number = document.getElementById("num");
+            var val =  parseInt(number.value); // input 태그에 입력값 가져오기
+            //alert(val);
+
+            // id가 result인 div 태그 가져오기
+            var res = document.getElementById("result");
+            if(val%2 == 0)
+            res.innerHTML = "짝수다"; //div태그 안에 값 넣어주기
+            else 
+            res.innerHTML = "홀수다";
+           
+        }
+
+
+    </script>
+</head>
+<body>
+    <input type="text" name="num" id="num" />
+    <button type="button" onclick="data_push()">입력</button>
+    <hr />
+    <div id="result"></div>
+</body>
+</html>
