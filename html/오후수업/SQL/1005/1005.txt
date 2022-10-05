@@ -56,3 +56,7 @@ SELECT job, avg(sal) FROM emp WHERE job = 'MANAGER' GROUP BY job HAVING avg(sal)
 
 -- 사원번호는 그룹핑 될 수 없다!
 SELECT empno FROM emp GROUP BY empno
+
+
+
+
