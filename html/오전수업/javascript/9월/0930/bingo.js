@@ -6,7 +6,7 @@ while( bingo.length != 25 ){
     let num = Math.floor(Math.random() * 100) + 1;
     // indexOf(찾을문자열) 함수는 문자열 안에서 입력한 문자열과 일치하는 위치를 찾아 인덱스를 반환
     if( bingo.indexOf(num) == -1 ){
-        bingo.push(num);.6
+        bingo.push(num);
     }
 }
 
