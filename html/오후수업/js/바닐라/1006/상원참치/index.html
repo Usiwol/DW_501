@@ -12,10 +12,10 @@
       <div class="header">
         <div class="banner"></div>
         <div class="nav">
-          <ul>
-            <li>전체 메뉴</li>
-            <li>오늘의 메뉴</li>
-            <li>베스트 메뉴</li>
+          <ul id="menu_list">
+            <li onClick="menu(0)">전체 메뉴</li>
+            <li onClick="menu(1)">오늘의 메뉴</li>
+            <li onClick="menu(2)">베스트 메뉴</li>
           </ul>
         </div>
       </div>
@@ -27,7 +27,7 @@
               <h6>참다랑어 뱃살</h6>
               <p>숙성 : <span>8일 숙성</span></p>
               <p>가격 : <span id="price1">22,000</span></p>
-              <a onclick="putin(this)" id="fattyTuna8" href="#">담기</a>
+              <a onClick="putin(this)" id="fattyTuna8" href="#">담기</a>
             </div>
           </div>
           <div class="menu">
@@ -36,7 +36,7 @@
               <h6>참다랑어 뱃살</h6>
               <p>숙성 : <span>2일 숙성</span></p>
               <p>가격 : <span id="price2">10,000</span></p>
-              <a onclick="putin(this)" id="fattyTuna2" href="#">담기</a>
+              <a onClick="putin(this)" id="fattyTuna2" href="#">담기</a>
             </div>
           </div>
           <div class="menu">
@@ -45,7 +45,7 @@
               <h6>참다랑어 등살</h6>
               <p>숙성 : <span>3일 숙성</span></p>
               <p>가격 : <span id="price3">12,000</span></p>
-              <a onclick="putin(this)" id="bestPartOfRed3" href="#">담기</a>
+              <a onClick="putin(this)" id="bestPartOfRed3" href="#">담기</a>
             </div>
           </div>
           <div class="menu">
@@ -54,7 +54,7 @@
               <h6>참다랑어 뱃살</h6>
               <p>숙성 : <span>5일 숙성</span></p>
               <p>가격 : <span id="price4">16,000</span></p>
-              <a onclick="putin(this)" id="fattyTuna5" href="#">담기</a>
+              <a onClick="putin(this)" id="fattyTuna5" href="#">담기</a>
             </div>
           </div>
           <div class="menu">
@@ -63,20 +63,30 @@
               <h6>참다랑어 스페셜 세트</h6>
               <p>숙성 : <span>5일 숙성</span></p>
               <p>가격 : <span>32,000</span></p>
-              <a onclick="soldout()" id="specialSet" href="#" style="color: red">품절</a>
+              <a onClick="soldout()" id="specialSet" href="#" style="color: red">품절</a>
             </div>
           </div>
         </div>
       </div>
       <div class="footer">
         <div class="order">
-          <button onclick="order()" type="button" id="order">주문하기</button>
+          <button onClick="order()" type="button" id="order">주문하기</button>
           <p>총 주문 금액 : <span id="totalMoney">0</span></p>
         </div>
       </div>
     </div>
     <script>
       // 1번 문제
+      function menu(n){
+        var x = document.getElementById("menu_list").children;
+        for(var i=0; i<x.length; i++){
+          var li = x[i];
+          li.style.background = "";
+          li.style.color = "";
+        }
+        x[n].style.background = "#ffffff";
+        x[n].style.color = "#4e4e4e";
+      }
       
 
       // 2번 문제
@@ -95,7 +105,7 @@
         if(p.id == "fattyTuna5"){
           money += 16000;
         }
-        total.innerHTML = money.toLocaleString("ko-KR");
+        total.innerHTML = money.toLocaleString("ko-KR"); 
         // "ko", "KR" == "ko-KR"
       }
 
@@ -110,7 +120,7 @@
         
         var res = document.getElementById("totalMoney");
         res.innerHTML = 0;
-        money = 0; // 
+        money = 0; // 누적금액 나오지 않게 해주기
       }
       
       
