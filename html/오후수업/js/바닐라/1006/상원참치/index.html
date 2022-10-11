@@ -13,7 +13,7 @@
         <div class="banner"></div>
         <div class="nav">
           <ul id="menu_list">
-            <li onClick="menu(0)">전체 메뉴</li>
+            <li onClick="menu(0)">전체 메뉴</li> 
             <li onClick="menu(1)">오늘의 메뉴</li>
             <li onClick="menu(2)">베스트 메뉴</li>
           </ul>
@@ -81,8 +81,8 @@
         var x = document.getElementById("menu_list").children;
         for(var i=0; i<x.length; i++){
           var li = x[i];
-          li.style.background = "";
-          li.style.color = "";
+            li.style.background = "";
+            li.style.color = "";
         }
         x[n].style.background = "#ffffff";
         x[n].style.color = "#4e4e4e";
