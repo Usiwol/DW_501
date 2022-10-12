@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+.input_wrap input{
+    width: 200px;
+    height: 35px;
+    font-size: 17px;
+}
+.input_wrap button{
+    width: 100px;
+    height: 37px;
+    font-size: 15px;
+}
+#birthday{
+    width: 500px;
+}
+#birthday ul li{
+    width: 100px;
+    height: 30px;
+}
