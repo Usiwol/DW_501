@@ -9,26 +9,32 @@
 <link rel="stylesheet" type="text/css" href="object.css">
 </head>
 <body>
+    <!-- <div name="play" id="play"></div>  -->   
     <div id="form">
         <!-- position 값 주기 -->
         <div class="input_line"> 
              <!-- position 값 주기 -->
-            <input type="text" id="movie_title">
+            <input type="text" id="movie_title" class="movie">
             <label for="movie_title">영화제목</label>
         </div>
         <div class="input_line">
-            <input type="text" id="movie_dir">
+            <input type="text" id="movie_dir" class="movie">
             <label for="movie_dir">감독</label>
         </div>
         <div class="input_line">
-            <input type="text" id="movie_year">
+            <input type="text" id="movie_year" class="movie">
             <label for="movie_year">개봉년도</label>
         </div>
         <div class="input_line">
-            <input type="text" id="movie_genre">
+            <input type="text" id="movie_genre" class="movie">
             <label for="movie_genre">장르</label>
         </div>
-        <button id="bt">등록</button>
+        <div class="bt">
+            <a href="javascript:enroll()">등록</a>
+        </div>
     </div>
+
+    <ul id="movie_list"></ul>
+    
 </body>
 </html>
