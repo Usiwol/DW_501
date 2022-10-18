@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script src="1018object_make.js"></script>
+</head>
+<body>
+<!-- 
+    행,열, 너비 높이 입력 가능한 input
+    input은 맨 윗줄에 한줄로 표시
+    버튼 -> text는 추가, input 아랫줄 만들기,
+        추가버튼 클릭시 버튼 아랫줄에 새로은 버튼 생성
+        새버튼의 text는 세팅1,
+        추가버튼 한번더 클릭시 세팅1 옆에 새버튼 생성
+        text는 세팅2, 추가 클릭시마다 세팅N 명칭으로 버튼 생성
+
+
+    객체명 : tb
+    행,열,너비,높이 입력하고 세팅 버튼 클릭시
+    tb객체에 값 저장, 저장 후 tb객체 배열에 저장
+
+    저장이 완료된 세팅 버튼을 다시 클릭시
+    해당 객체 값을 #draw 에 출력하기
+-->
+    <div class="input_wrap">
+        <input type="number" name="col" id="col" class="T_put" placeholder="행">
+        <input type="number" name="row" id="row" class="T_put" placeholder="열">
+        <input type="number" name="width" id="width" class="T_put" placeholder="너비">
+        <input type="number" name="height" id="height" class="T_put" placeholder="높이">
+    </div>
+    <div class="add_bt_wrap">
+        <button id="add">추가</button>
+    </div>
+    <div class="add_wrap">
+
+    </div>
+
+    <div id="draw"></div>
+
+</body>
+</html>
