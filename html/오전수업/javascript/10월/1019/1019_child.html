@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+
+    window.onload = function(){
+        var name = opener.document.getElementById("name").value;
+        document.getElementById("name_view").innerHTML = name;
+    };
+ 
+    function send(){
+        var parent = opener.document.getElementById("age");
+        var age = document.getElementById("age").value;
+
+        parent.value = age;
+    }
+
+    // function open_win(){
+    //     window.open("1019_child2.html",
+    //     "_self","width=500,height=500");
+    // }
+
+    // function open_win(){
+    //     window.open("1019_child2.html",
+    //     "_blank","width=500,height=500");
+    // }
+</script>
+</head>
+<body>
+    <h1>자식 윈도우</h1>
+
+    <div id="name_view"></div>
+    <input type="text" id="age">
+    <button onclick="send()">부모에전달</button>
+
+    <!-- <button onclick="open_win()">새창 열기</button> -->
+
+    <!-- <a href="1019_child2.html" target="_blank">이동</a>
+    <iframe src="1019_child2.html" frameborder="0"></iframe> -->
+</body>
+</html>
+<script>
+
+</script>
