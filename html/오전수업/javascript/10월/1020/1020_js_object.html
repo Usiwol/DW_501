@@ -29,6 +29,8 @@
         <input type="checkbox" name="fav" id="fav">
         <a href="javascript:view();">보기</a>
     </form>
+
+    <a href="1020_cook_test.html">이동</a>
 </body>
 </html>
 
@@ -73,18 +75,22 @@
     function getCookie(){
         // decode : 사람이 볼 수 있는 언어로 바꿔주는 작업
         let decode_cook = decodeURIComponent(document.cookie);
-        let temp = decode_cook.split(';');
+        let temp = decode_cook.split(';'); // 위 구분자 역할 ;(세미콜론)
         for(let i = 0; i<temp.length; i++){
             let c = temp[i];
-            while(c.charAt(0) == ''){
+            // 맨 앞 0번 인덱스가 비어있을 경우를 위해 while문 사용
+            while(c.charAt(0) == ' '){
+                // substring() : 문자열에서 문자열을 빼오는 함수
+                // substring(1,3) : 1번 인덱스 부터 3번 인덱스 전까지
                 c = c.substring(1);
             }
-            if (c.indexOf("name") ==  0){
-                alert( c.substring("name =".length, c.length) );
+            // 
+            if (c.indexOf("name=") ==  0){
+                alert( c.substring("name=".length,c.length) );
             }
         }
     }
-
+    getCookie();
 
     // form
     // document.getElementById("day").value;
