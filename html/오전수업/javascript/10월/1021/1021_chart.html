@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="chart"></canvas>
+</body>
+</html>
+<script>
+    // 차트만들기
+    const label = [ // 배열구조
+        '2018', '2019', '2020', '2021', '2022'
+    ];
+    const data = { // 객체
+        labels : label,
+        datasets : [{
+            label : '아무차트', 
+            backgroundColor : 'rgb(100,100,100)',
+            borderColor : 'rgb(255,100,200)',
+            data : [88,77,99,55,66],
+        }]
+    };
+    const config = {type : 'bar', data : data}
+
+    const chat = new Chart(document.getElementById("chart"), config);
+</script>
