@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+    if(window.HTMLCanvasElement)
+        alert("지원");
+</script>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="900"></canvas>
+</body>
+</html>
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle="rgb(100,200,200)";
+    ctx.fillRect(10,10,50,50);
+
+    // 그릴때 마다 색을 지정해 줘야 한다.
+    ctx.fillStyle="rgb(200,0,0)";
+    ctx.fillRect(100,100,100,50);
+
+    // 선만 있는 사각형
+    ctx.stroketStyle="rgb(50,200,100)";
+    ctx.strokeRect(100,120,70,200);
+
+    ctx.beginPath(); // 선시작
+    ctx.moveTo(50,50); // 시작점
+    ctx.lineTo(200,200);  
+    
+    ctx.stroketStyle = "rgb(0,0,100)";
+    ctx.moveTo(100,100); // 시작점
+    ctx.lineTo(500,50);  
+
+    // 삼각형그리기
+    // 좌표 잘 생각해서 그리기!
+    ctx.moveTo(300,300); // 시작점
+    ctx.lineTo(400,300);  
+    ctx.lineTo(350,400);  
+
+    ctx.closePath(); // 선끝
+    ctx.stroke();
+
+</script>
