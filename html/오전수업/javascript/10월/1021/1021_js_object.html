@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+   /*
+   if(미로그인 상태){
+        alert("로그인 후 이용해주세요");
+        location.href='login.html'
+        // history.back();
+    }
+    if(로그인시 아이디 비번 틀렸다면){
+        var move = confirm(
+            "아이디 또는 비밀번호가 올바르지 않습니다. 회원가입 하시겠습니까?"
+            );
+        if(move){
+            location.href = "join.html" 
+        }else{
+            history.back();
+        }
+        // alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+        // history.back();
+    }
+
+    document.write("appName : "+ navigator.appName + "<br>");
+    document.write("appCodeName : "+ navigator.appCodeName + "<br>");
+    document.write("appVersion : "+ navigator.appVersion + "<br>");
+    document.write("platform : "+ navigator.platform + "<br>");
+    document.write("userAgent : "+ navigator.userAgent + "<br>");
+
+    var os = navigator.userAgent;
+    if(os.toLowerCase().indexOf("windows") !=-1){
+        alert("현재 접속기기는 PC 입니다.");
+    }else if(os.toLowerCase().indexOf("android") !=-1){
+        alert("현재 접속기기는 모바일(안드로이드)입니다.");
+    }else if(os.toLowerCase().indexOf("iphone") !=-1){
+        alert("현재 접속기기는 아이폰입니다.");
+    }
+*/
+   
+    /*
+
+    appName : Netscape
+    appCodeName : Mozilla
+    appVersion : 5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36
+    platform : Win32 --> 숫자 32는 32bit 를 의미함
+    userAgent : Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36
+
+    */
+
+    // 192.168.0.28:5500
+
+    // 핸드폰으로 확인하기
+    var orient = window.orientation;
+    if(orient != undefined){
+        if(orient == 0){
+            alert("세로 방향");
+        }else if(orient == -90 || orient == 90){
+            alert("가로 방향");
+        }
+    }
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
