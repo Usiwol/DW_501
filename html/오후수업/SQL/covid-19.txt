@@ -1,0 +1,357 @@
+-- 확진자
+CREATE TABLE coronic(
+registration varchar(30) primary key,
+name varchar(30) comment "이름",
+age int(4) comment "나이",
+gender varchar(30) comment "성별",
+is_foreign bool comment "외국인 여부"
+phoneno varchar(30) comment "전화번호",
+area varchar(30) comment "지역",
+address varchar(30) comment "주소",
+confirmeddate datetime comment "확진날짜",
+is_overseastrip bool comment "해외여행여부"
+)
+
+-- 지병
+CREATE TABLE disease(
+diseaseno varchar(30) primary key,
+diseasename varchar(30) comment "병명"
+)
+
+-- 병원
+CREATE TABLE hospital(
+hospitalcode varchar(30) primary key,
+hospitalname varchar(30) comment "병원명",
+hospitaladdress varchar(30) comment "병원주소"
+)
+
+-- 코로나 확진상세정보
+CREATE TABLE covid19_info(
+coronicno varchar(30) primary key,
+registration varchar(30) comment "주민등록번호",
+diseaseno varchar(30) comment "지병번호",
+self_isolation varchar(30) comment "자가격리 유무",
+vaccinecode varchar(30) comment "백신코드",
+FOREIGN KEY (registration) REFERENCES coronic(registration) ON DELETE CASCADE,
+FOREIGN KEY (diseaseno) REFERENCES disease(diseaseno) ON DELETE CASCADE,
+FOREIGN KEY (vaccinecode) REFERENCES vaccine(vaccinecode) ON DELETE CASCADE
+)
+
+-- 백신
+CREATE TABLE vaccine(
+vaccinecode varchar(30) primary key,
+vaccine_manufacturer varchar(30) comment"백신제조사"
+)
+
+-- 입원
+CREATE TABLE Patient(
+patientno varchar(30) primary key,
+hospitalcode varchar(30) comment "병원코드",
+coronicno varchar(30) comment"확진번호",
+hospital_in datetime comment"입원날짜",
+hospital_out datetime comment"퇴원날짜",
+FOREIGN KEY (hospitalcode) REFERENCES hospital(hospitalcode) ON DELETE CASCADE,
+FOREIGN KEY (coronicno) REFERENCES covid19_info(coronicno) ON DELETE CASCADE
+)
+
+-- alter table [테이블명] add column [추가할 컬럼명]
+ALTER TABLE coronic ADD COLUMN confirmeddate date
+ALTER TABLE coronic ADD COLUMN is_foreign bool
+ALTER TABLE coronic ADD COLUMN is_overseastrip bool
+
+
+-- coronic 데이터넣기
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("860525-1******", "하동훈", 37, "남", false, "010-5169-8823",	"울산	", "울산 중구 외솔큰길 225", "2021-05-07", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+VALUES ("290322-1******", "신구",	93,	"남", false, "010-1235-0001", "서울", "서울 강북구 한천로 897", "2020-01-29", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("870622-2******", "배수지", 36, "여",	false, "010-8823-3301",	"경남", "경남 합천군 합천읍 합천리 524-1",	"2021-03-25", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("750631-1******", "정우성", 48, "남", false, "010-1381-7545",	"부산", "부산 수영구 광안1동 661-1번지", "2020-01-31", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("851111-2******", "송지효", 38, "여", false, "010-1211-9822",	"대전	", "대전 서구 구봉산북로 300", "2020-02-15",	FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("900521-2******", "이지은", 33, "여",	false, "010-9623-1110",	"강원도",	"강원 영월군 영월읍 하송로 44", "2021-04-05", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("660902-1******", "이동욱", 57, "남",	false, "010-2256-9736",	"부산", "부산	중구로120번길", "2020-02-22", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("460529-1******", "이순재", 77, "남",	false, "010-1245-7896",	"충남	", "충남 아산시 남부로 370-24", "2021-04-27", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("271002-2******", "나문희", 95, "여",	false, "010-2569-8989",	"경기도",	 "경기 용인시 처인구 삼가동 556",	"2020-02-29", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("850610-2******", "김은숙", 38, "여",	false, "010-4410-3332",	"광주", "광주 북구 용봉로 136", "2021-04-30", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("330715-1******", "곽철용", 89, "남", false, "010-1235-9634", "강원도", "강원 고성군 간성읍 수성로 30", "2022-05-21", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("071219-1******", "류은성", 16, "남",	false, "010-8963-4420", "충남", "충남 홍성군 홍성읍 문화로 106", "2021-05-02",	FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("020928-1******", "하정우", 21, "남",	false, "010-8850-9997", "인천", "인천 중구 전동 2-1", "2022-03-22", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("840927-1******", "이광수", 39, "남",	false, "010-8984-1111",	"경기도", "경기 동두천시 생연2동 714-9	", "2021-03-05", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("800118-2******", "최지우", 43, "여",	false, "010-8512-9967",	"대구	", "대구 수성구 중동 266-5", "2021-03-09", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("680301-1******", "이병헌", 55, "남",	false, "010-8872-1203",	"인천", "인천광역시 미추홀구 주안로 95-19", "2021-03-15", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("420827-2******", "윤여정", 80, "여",	false, "010-2235-8964", "울산", "울산 동구 화정동 222", "2022-06-07", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("570313-1******", "공지철", 66, "남",	false, "010-2554-8776",	"대구", "대구 달성군 현풍읍 하리 253-2", "2021-04-02",	FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("940731-2******", "변은정", 29, "여",	false, "010-8774-3008",	"부산", "부산 사상구 감전동 138-8", "2021-03-16", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("190611-2******", "권희율",	4,	"여", false,	"010-7618-9013", "서울", "서울 용산구 이태원동 34-87", "2022-08-15", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("550520-2******", "박하나", 68, "여",	false, "010-1255-9961",	"광주	", "광주 동구 서석동 31번지", "2021-06-22", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("770113-2******", "김희선", 46, "여",	false, "010-1289-7741",	"서울",	"서울 동작구 상도2동 176-3", "2021-04-13", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("090525-2******", "김혜은", 14, "여",	false, "010-1101-6637",	"경북", "경북 상주시 무양동 33-4", "2021-06-15", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("610505-2******", "한미나", 62, "여", false, "010-7745-1219",	"서울	", "서울특별시 광진구 능동로 120-1", "2021-04-22", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("370223-1******", "이춘식", 85, "남", false, "010-9656-2454",	"충북	", "충북 충주시 사직산22길 11", "2021-06-01", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("770423-1******",	"유재석",	46,	"남", false,	"010-3547-5844", "부산",	"부산 해운대구 좌2동 1339", "2021-07-29", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("021231-2******", "장예은", 21, "여",	false, "010-4155-7730",	"전남", "전남 나주시 이창동 740-1", "2021-03-18", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("970402-2******", "변수정", 26, "여",	false, "010-7744-1149",	"경북", "경북 구미시 선산대로 111", "2021-05-27",	FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("030525-1******", "김성태", 20, "남", false, "010-0015-9923", "대구", "대구 달성군 현풍읍 하리 253-2", "2022-08-22",	false)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("060303-2******", "유성은", 17, "여",	false, "010-7762-3130",	"경남", "경남 남해군 남해읍 선소로 6", "2021-06-13", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("890223-1******", "조정구", 34, "남", false, "010-8812-3398", "서울", "서울 서초구 서초동(서초2동) 1376-3", "2022-08-11", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("000102-2******", "이선희", 23, "여",	false, "010-5514-9988", "강원도",	 "강원 태백시 태백로 905", "2021-04-11",	 TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("720906-1******", "장동건", "51",	 "남", false, "010-8646-2156", "충남", "충청남도 당진시 시청1로 1", "2021-10-15", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("590830-2******", "유민희", 64, "여", false, "010-3321-5587", "충남", "충청남도 공주시 봉황로 123", "2022-08-31", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("911020-1******", "윤재영", 32, "남",	false, "010-7741-3300", "충북", "충청북도 제천시 청전동 110", "2022-02-22", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("740215-1******", "이정재", 49, "남",	false, "010-4157-2676",	"경기도",	"경기 시흥시 서해안로 1589",	"2021-06-08", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("820823-1******", "김종국", 41, "남",	false, "010-1556-3368",	"전북", "전북 군산시 수송동 851-1", "2021-04-20",	 FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("661124-2******", "이민정", 57, "여",	false, "010-4456-8710",	"대전", "대전광역시 동구 가오동 425", "2021-06-03", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("520231-1******", "남궁민", 71, "남",	false, "010-1212-8979",	"광주", "광주광역시 서구 경열로 33", "2021-05-15",	FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("791001-1******", "이종국", 44, "남", false, "010-5589-2114", "전남", "전남 순천시 석현동 36-1", "2022-09-05", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("490822-2******", "선우용녀", 74,	"여", false,	"010-2555-8978", "서울",	"서울 관악구 청룡동 1570-1", "2022-01-11", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("160721-1******", "김진",	 7,	"남", false,	"010-7810-1396", "경기도", "경기 광명시 오리로 613", "2022-05-11", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("110601-1******", "마동석", 12, "남",	false, "010-8742-3345", "경기도", "경기 성남시 수정구 신흥동 3435", "2022-04-20", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("640211-2******", "옥순이", 59, "여",	false, "010-5541-9873", "서울", "서울 도봉구 쌍문동 565", "2022-03-12", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("140230-2******", "민지은", 9, "여	", false, "010-4510-6632", "대구", "대구 서구 평리3동 1230-9", "2021-06-30", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("540411-2******", "김순옥", 69, "여",	false, "010-1111-1112",	"경기도",	"경기 수원시 장안구 조원동 888번지", "2021-03-31",	FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("950530-1******", "조나단", 28, "남",	false, "010-8601-5514",	"경기도",	 "경기도 용인시 기흥구 신갈로 58번길 11", "2021-05-31", TRUE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("990623-1******", "윤종찬", 24, "남",	false, "010-3998-7712",	"대전	", "대전 대덕구 석봉로38번길55", "2021-07-03", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("530101-2******", "이소라", 70, "여",	false, "010-2333-9999",	"제주", "제주 제주시 연삼로 264", "2021-11-09", FALSE)
+INSERT INTO coronic (registration, name, age, gender, is_foreign, phoneno, area, address, confirmeddate, is_overseastrip)
+values ("700423-2******", "고소영", 53, "여",	false, "010-9971-4563",	"제주", "제주 서귀포시 중앙로101번길 52", "2021-07-22", FALSE)
+
+
+-- vaccine 데이터 넣기
+INSERT INTO vaccine(vaccinecode, vaccine_manufacturer) VALUES ("CTB2937", "아스트라제네카")
+INSERT INTO vaccine(vaccinecode, vaccine_manufacturer) VALUES ("035F21A", "모더나")
+INSERT INTO vaccine(vaccinecode, vaccine_manufacturer) VALUES ("FG3712", "화이자") 
+INSERT INTO vaccine(vaccinecode, vaccine_manufacturer) VALUES ("207A21A", "얀센")
+
+
+-- hospital 테이터 넣기
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("135230", "삼성 서울병원", "서울 강남구 일원로81 삼성서울병원")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("135710", "강남 세브란스병원", "서울 강남구 언주로211 강남세브란스병원")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("134310", "중앙보훈병원", "서울 강동구 진황도로 61길 53")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("143110", "건국대학교병원", "서울특별시 광진구 능동로 120-1")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("153040", "희명병원", "서울특별시 금천구 시흥대로 244")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("609410", "세웅병원", "부산광역시 금정구 서동로 162")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("616120", "부민병원", "부산 북구 만덕대로 59")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("704314", "삼일병원", "대구 달서구 월배로 436")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("704340", "세강병원", "대구 달서구 구마로 220")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("705015", "드림병원", "대구 남구 대명로 153")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("701010", "대구파티마병원", "대구광역시 동구 아양로 99")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("406110", "인천적십자병원", "인천광역시 연수구 원인재로 263")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("409910", "백령병원", "인천광역시 백령로 233")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("401071", "인천백병원", "인천 동구 샛골로214")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("503010", "광주기독병원","광주광역시 남구 양림로 37")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("500812", "광주일곡병원", "광주 북구 양일로 309")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("300141", "대전한국병원", "대전광역시 동구 동서대로 1672")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("031010", "대전선병원", "대전광역시 중구 목중로 29 대전선병원")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("305312", "유성선병원","북유성대로93")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("680030", "울산병원", "울산 남구 월평로 171번길 13")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("689810", "서울산보람병원", "울주군 삼남읍 중평로 53")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("390811", "의료법인명지의료재단명지병원", "경기 고양시 덕양구 화수로14번길 55")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("464813", "참조은병원", "광주대로 45")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("471030", "원진녹색병원", "경기도 구리시 동구릉로65")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("200120", "강남병원", "경기도 용인시 기흥구 중부대로 411")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("415012", "뉴고려병원", "경기도 김포시 김포한강3로 283")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("101110", "히즈메디병원", "김포시 김포대로 681")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("121212", "정수병원", "경기 남양주시 퇴계원읍 퇴계원로 20 엘병원")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("681181", "박병원", "평택시 송탄로 33")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("369816", "현대병원", "경기도 남양주시 진접읍 봉현로 21")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("370818", "영동병원", "충북 영동군 영동읍 대학로 106")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("000052", "베스티안병원", "충청북도 흥덕구 오송읍 오송생명1로 191")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("343816", "당진종합병원", "당진시 반촌로 5-15")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("325820", "서해병원", "충남 서천군 서천읍 서천로 184")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("369816", "현대병원", "충남 아산시 시민로 388")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("340812", "예산종합병원", "충남 예산군 예산읍 금오대로 94")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("330011", "천안우리병원", "충청남도 천안시 동남구 남부대로 350")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("585810", "고창병원", "전북 고창군 고창읍 화신1길 9")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("530316", "세안종합병원", "전남 목포시 고하대로 795-2")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("590111", "여천전남병원", "전남  여수시 무선로 95")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("515817", "장성병원", "전남 장성군 장성읍 역전로 171")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("790310", "포항성모병원", "경상북도 포항시 남구 대잠동길 17")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("630520", "삼성창원병원", "창원시 마산회원구 팔용로 158")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("660320", "반도병원", "경남 진주시 남강로701")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("650020", "통영적십자병원", "경남 통영시 중앙로97")
+INSERT INTO hospital(hospitalcode, hospitalname, hospitaladdress) VALUES ("690110", "제주한라병원", "도령로 65")
+
+
+
+-- disease
+INSERT INTO disease(diseaseno, diseasename) VALUES ("J06", "급성 상기도감염")
+INSERT INTO disease(diseaseno, diseasename) VALUES ("J39","상기도의 기타 질환")
+INSERT INTO disease(diseaseno, diseasename) VALUES ("B34.2", "상코로나바이러스감염")
+
+
+-- covid19_info 
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("001","290322-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("002","860525-1******","B34.2", true, "CTB2937")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("003","870622-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("004","750631-1******","B34.2", true, "CTB2937")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("005","851111-2******","B34.2", true, "207A21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("006","900521-2******","B34.2", true, "207A21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("007","660902-1******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("008","460529-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("009","271002-2******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("010","850610-2******","B34.2", true, "207A21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("011","330715-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("012","071219-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("013","840927-1******","B34.2", true, "207A21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("014","800118-2******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("015","680301-1******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("016","420827-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("017","570313-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("018","940731-2******","B34.2", true, "CTB2937")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("019","190611-2******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("020","550520-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("021","770113-2******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("022","090525-2******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("023","610505-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("024","370223-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("025","770423-1******","B34.2", true, "CTB2937")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("026","020928-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("027","021231-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("028","700423-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("029","590830-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("030","970402-2******","B34.2", true, "CTB2937")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("031","030525-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("032","060303-2******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("033","890223-1******","B34.2", true, "207A21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("034","000102-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("035","720906-1******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("036","911020-1******","B34.2", true, "207A21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("037","740215-1******","B34.2", true, "CTB2937")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("038","820823-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("039","661124-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("040","520231-1******","B34.2", true, "CTB2937")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("041","791001-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("042","490822-2******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("043","160721-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("044","110601-1******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("045","640211-2******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("046","140230-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("047","540411-1******","B34.2", true, "FG3712")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("048","950530-1******","B34.2", true, "207A21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("049","990623-1******","B34.2", true, "035F21A")
+INSERT INTO covid19_info(coronicno, registration, diseaseno, self_isolation, vaccinecode)
+VALUES ("050","530101-2******","B34.2", true, "FG3712")
+
+
+-- patient
+INSERT INTO patient (patientno, hospitalcode, coronicno, hospital_in, hospital_out)
+VALUES ("1","135230","001","2020-01-31","2020-02-25")
+INSERT INTO patient (patientno, hospitalcode, coronicno, hospital_in, hospital_out)
+VALUES ("2","369816","008","2021-04-20","2021-04-30")
+INSERT INTO patient (patientno, hospitalcode, coronicno, hospital_in, hospital_out)
+VALUES ("3","200120","009","2020-03-02","2020-03-22")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("4","153040","011","2022-05-23","2022-06-05")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("5","415012","016","2022-06-11","2022-06-25")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("6","704314","017","2021-04-05","2021-04-28")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("7","500812","024","2021-06-25","2021-07-10")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("8","369816","029","2022-09-01","2022-09-19")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("9","369816","035","2021-10-15","2021-10-31")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("10","503010","040","2021-05-16","2021-05-30")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("11","153040","042","2022-01-15","2022-02-05")
+INSERT INTO patient (patientno,hospitalcode,coronicno,hospital_in,hospital_out)
+VALUES ("12","143110","045","2022-03-15","2022-03-28")
+
