@@ -1,0 +1,64 @@
+-- 확진자
+CREATE TABLE coronic(
+registration varchar(30) primary key,
+area varchar(30) comment "지역",
+address varchar(30) comment "주소",
+name varchar(30) comment "이름",
+age int(4) comment "나이",
+gender varchar(30) comment "성별",
+phoneno int(4) comment "전화번호"
+
+)
+
+-- 지병
+CREATE TABLE disease(
+diseaseno varchar(30) primary key,
+diseasename varchar(30) comment "병명"
+)
+
+-- 병원
+CREATE TABLE hospital(
+hospitalcode varchar(30) primary key,
+hospitalname varchar(30) comment "병원명",
+hospitaladdress varchar(30) comment "병원주소"
+)
+
+-- 코로나 확진상세정보
+CREATE TABLE covid19_info(
+coronicno varchar(30) primary key,
+registration varchar(30) comment "주민등록번호",
+diseaseno varchar(30) comment "지병번호",
+self_isolation varchar(30) comment "자가격리 유무",
+vaccinecode varchar(30) comment "백신코드",
+FOREIGN KEY (registration) REFERENCES coronic(registration) ON DELETE CASCADE,
+FOREIGN KEY (diseaseno) REFERENCES disease(diseaseno) ON DELETE CASCADE,
+FOREIGN KEY (vaccinecode) REFERENCES vaccine(vaccinecode) ON DELETE CASCADE
+)
+
+-- 백신
+CREATE TABLE vaccine(
+vaccinecode varchar(30) primary key,
+vaccine_manufacturer varchar(30) comment"백신제조사"
+)
+
+-- 입원
+CREATE TABLE Patient(
+patientno varchar(30) primary key,
+hospitalcode varchar(30) comment "병원코드",
+coronicno varchar(30) comment"확진번호",
+hospital_in datetime comment"입원날짜",
+hospital_out datetime comment"퇴원날짜",
+FOREIGN KEY (hospitalcode) REFERENCES hospital(hospitalcode) ON DELETE CASCADE,
+FOREIGN KEY (coronicno) REFERENCES covid19_info(coronicno) ON DELETE CASCADE
+)
+
+-- alter table [테이블명] add column [추가할 컬럼명]
+ALTER TABLE coronic ADD COLUMN confirmeddate datetime
+ALTER TABLE coronic ADD COLUMN is_foreign bool
+ALTER TABLE coronic ADD COLUMN overseastrip_status bool
+
+
+-- 확진자 데이터넣기
+INSERT INTO coronic (registration, name, age, gender, is_foreign, 
+phoneno, area, address, confirmeddate, overseastrip_status )
+VALUES ()
