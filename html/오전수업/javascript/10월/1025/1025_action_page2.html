@@ -9,8 +9,45 @@
 <link rel="stylesheet" href="static/css/init.css">
 </head>
 <body>
-    
-    <div id="wrap">
+    <div id="wrap"> 
+        <section id="multi-section">
+            <div>
+                <video controls>
+                    <source src="../../../image/bread_video.mp4" type="video/mp4"></source>
+                </video>
+                <img src="../../../image/bread1.jpg" alt="">
+                <img src="../../../image/bread2.jpg" alt="">           
+            </div>
+        </section>
+
+        <section id="image-section">
+            <div class="image_wrap">
+                <div class="image-box imgb1">
+                    안녕?
+<!-- 
+    모바일과 pc의 크기가 같게 나오게 하기 위해 이 공식 사용하기!
+    (가변길이적용할길이값 / 적용할 박스를 감싸고 있는 박스의 가로너비) * 100             
+-->
+<!-- 
+    가변폰트단위 : vw(viewport width), vh(viewport height), vmin, vmax
+    vmin : 브라우저의 너비, 높이 중 작은 값 기준
+    vmax : 브라우저의 너비, 높이 중 큰 값 기준
+ -->
+<!-- (360 / 1000) * 100 -->
+                </div>
+                <div class="image-box imgb2">
+                    안녕!
+<!-- (640 / 1000) * 100 -->
+
+<!-- 
+1. 최대 너비값 정하기
+2. 요소별 너비값 px로 길이 값 구하기
+3. 가변 길이값 구하는 식으로 %로 변환하여 작성 
+-->
+
+                </div>
+            </div>    
+        </section>
         <section id="main-section">
             <div class="page-title">
                 <div class="title1">

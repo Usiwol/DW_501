@@ -15,11 +15,59 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 90%;
-    padding: 5% 5%;
+    /* 너비에 적용하는 계산식 */
+    /* 띄어쓰기 잘하기 */
+    width: calc( 100% - 100px );
+    padding: 5% 50px;
     max-width: 1000px;
     margin: 0 auto;
 }
+
+#image-section{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.image_wrap{
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+}
+.imgb1{
+    width: 36%;
+    background: pink;
+    /* font-size: 5vw; */
+    font-size: 5vmin;
+}
+.imgb2{
+    width: 64%;
+    background: #478899;
+    font-size: 5vh;
+}
+.image-box{
+    height: 350px;
+}
+
+#multi-section{
+    width: 100%;    
+}
+#multi-section>div{
+    width: 70%;
+    display: inline-block;
+    margin: 0 15%;
+}
+#multi-section img, #multi-section video{
+    width: 100%;
+    max-width: 100%;
+}
+
+
+
+
+
+
 
 /* 태블릿 */
 @media all and (min-width:780px){

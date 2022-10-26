@@ -1,0 +1,65 @@
+
+/* 1025_action_page4.html */
+
+body,div{
+    margin: 0;
+    padding: 0;
+}
+
+#flex1{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 200px;
+    margin: 0 auto;
+    border: 5px solid #ffffff;
+}
+#flex1 div{width: 33.33%;}
+#flex1 div:nth-child(1){background: red;}
+#flex1 div:nth-child(2){background: green;}
+#flex1 div:nth-child(3){background: blue;}
+
+/* flex 2 */
+#flex2{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 200px;
+    margin: 0 auto;
+    border: 5px solid #ffffff;
+}
+#flex2 div{width: 33.33%; height: 50px;}
+#flex2 div:nth-child(1){background: red;}
+#flex2 div:nth-child(2){background: green;}
+#flex2 div:nth-child(3){background: blue;}
+
+/* flex 3 */
+#flex3{
+    display: flex;
+    flex-direction: row;
+    /* 너비에 따라 줄바꿈이 다르다 */
+    flex-wrap: wrap;
+    width: 90%;
+    height: 200px;
+    margin: 0 auto;
+    border: 5px solid #ffffff;
+}
+#flex3 div{width: 40%; height: 50px;}
+#flex3 div:nth-child(1){background: red;}
+#flex3 div:nth-child(2){background: green;}
+#flex3 div:nth-child(3){background: blue;}
+
+/* flex 4 */
+#flex4{
+    display: flex;
+    /* <flex 방향 row 배치 wrap-reverse */
+    flex-flow: row wrap-reverse;
+    width: 90%;
+    height: 200px;
+    margin: 0 auto;
+    border: 5px solid #ffffff;
+}
+#flex4 div{width: 100%; height: 50px;}
+#flex4 div:nth-child(1){background: red;}
+#flex4 div:nth-child(2){background: green;}
+#flex4 div:nth-child(3){background: blue;}

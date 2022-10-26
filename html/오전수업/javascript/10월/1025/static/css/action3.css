@@ -1,0 +1,36 @@
+
+/* 1026_action_page3.html */
+
+/* 반응형페이지 만들기*/
+
+#wrap{
+    /* 감싸고 있는 div 최대크기 */
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+}
+.box{
+    display: inline-block;
+    height: 100px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.box1{background: red;}
+.box2{background:pink;}
+.box3{background: green;}
+.box4{background:skyblue;}
+.box5{background: greenyellow;}
+
+
+/* 작은것 -> 큰것 순서대로  하는것이 좋다 */
+@media all and (min-width:768px){
+    .box{ width:50%}
+    .box5{ width:100%}
+}
+
+/* 모바일 기준 */
+/* 최소가 1024 이므로 1024 이상일 경우만 작동함 */
+@media all and (min-width:1024px){
+    .box{ width:20%}
+}
