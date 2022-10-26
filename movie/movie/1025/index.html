@@ -14,13 +14,20 @@
       value="뚱인데요"
     />
     <h3>해외 영화 검색하기</h3>
-    <input type="text" placeholder="검색어를 입력해주세요..." />
+    <input id="search" type="text" placeholder="검색어를 입력해주세요..." />
     <select id="type">
       <option value="movie">movie</option>
       <option value="series">series</option>
       <option value="episode">episode</option>
     </select>
     <button onclick="doSearch()">영화 검색</button>
+
+    <h3 id="movieTitle"></h3>
+    <p>개봉년도 : <span id="year"></span></p>
+    <p>영화 고유번호(PK) : <span id="movieId"></span></p>
+    <p>영화 포스터 : <span id="poster"></span></p>
+
+
   </body>
   <!-- JQuery CDN download -->
 
@@ -58,16 +65,27 @@
       $.ajax({
         url:
           'http://www.omdbapi.com/?apiKey=' +
-          ae6ff97c +
+          API_KEY +
           '&s=' +
           search +
           '&type=' +
           type +
           '',
         type: 'GET',
-        dataType: 'json',
+        dataType: 'json', 
         success: function (response) {
           console.log(response);
+          console.log(response.Search[0].Title);
+          // Crazy, Stupid, Love 고유 아이디 출력하기
+          console.log(response.Search[0].imdbID);
+          var movieTitle = response.Search[0].Title;
+          // append ; 추가하다
+          $("#movieTitle").append(movieTitle)
+          $("#year").append(response.Search[0].Year)
+          $("#movieId").append(response.Search[0].imdbID)
+          var html = '<img src="'+response.Search[0].Poster+'">';
+          $('#poster').append(html);
+          
         },
       });
     }

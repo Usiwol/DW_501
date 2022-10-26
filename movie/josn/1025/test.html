@@ -59,7 +59,22 @@
     }
 
     // 문제 2번. 영화 명량과 어벤져스의 판매액 합산을 구하시오.
+    // 방법 1)
     console.log(movies[0].salesRevenue + movies[4].salesRevenue);
+    
+    // 방법 2)
+    var sum = 0;
+    sum = movies[0].salesRevenue + movies[4].salesRevenue;
+    console.log(sum);
+    
+    // 방법 3)
+    sum = 0;
+    for(var i = 0; i < movies.length; i++){
+      if(movies[i].name == '명량' || movies[i].name == "어벤져스: 엔드게임"){
+        sum += movies[i].salesRevenue;
+      }
+    }
+    console.log(sum);
 
     // 문제 3번. 1위 영화부터 5위 영화 판매액 평균을 구하시오.
     var sum = 0;
