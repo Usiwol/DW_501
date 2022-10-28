@@ -71,7 +71,9 @@
         </div>
       </div>
 
+      <div class="movie-list">
       <div class="title">
+        <!-- 타이틀 -->
         <h2 class="main-title">Movie World</h2>
       </div>
       <div class="movie-row">
@@ -138,6 +140,7 @@
           <input id="series-id-4" type="hidden" />
         </div>
       </div>
+    </div>
     </div>
   </body>
   <script
@@ -234,6 +237,7 @@
           console.log(response);
           // hidden -> visible
           $('.movie-section').css('visibility', 'visible');
+          $('.movie-list').css('opacity', "0.3");
           // 영화제목
           $('#movie-title').empty();
           $('#movie-title').append(response.Title);
@@ -294,6 +298,7 @@
           console.log(response);
           // hidden -> visible
           $('.movie-section').css('visibility', 'visible');
+          $('.movie-list').css('opacity', 0.3);
           // 영화제목
           $('#movie-title').empty();
           $('#movie-title').append(response.Title);
@@ -337,6 +342,7 @@
 
     function doClose(){
       $('.movie-section').css('visibility', 'hidden');
+      $('.movie-list').css('opacity', 1);
     }
   </script>
 </html>
