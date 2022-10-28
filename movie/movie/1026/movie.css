@@ -5,17 +5,28 @@ body {
   /* 축소 확대 할 때 자연스럽게 해줌 */
   /* 간단한 싱글사이트일 경우 사용할 것 */
   transition: 0.3s;
+  background: #141414;
+  font-family: 'Open Sans', sans-serif;
 }
 .container {
+  position: relative;
   padding: 20px;
   /* width: 100%; */
   height: auto;
-  background-color: #ececec;
-  margin: 50px auto;
+  /* background-color: #ececec; */
+  margin: 15px auto;
+}
+.main-title {
+  text-align: center;
+  font-size: 42px;
+  color: #ffff;
+  font-weight: 900;
 }
 .title {
   text-align: center;
   font-size: 42px;
+  color: #ffff;
+  font-weight: 400;
 }
 .movie-row {
   display: flex;
@@ -43,4 +54,84 @@ body {
   margin-top: 5px;
   font-size: 18px;
   text-align: center;
+  color: #ffff;
+}
+
+/* 영화 상세정보 css */
+.movie-section {
+  z-index: 1;
+  visibility: hidden;
+  background-color: #141414;
+  top: 100px;
+  left: 100px;
+  position: absolute;
+  display: flex;
+  width: 1700px;
+  margin: 100px auto;
+  justify-content: space-evenly;
+  padding: 40px 0;
+  color: #fff;
+  font-weight: 400;
+  border: 1px solid #e3e6f0;
+  border-radius: 0.35rem;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.back {
+  flex-basis: 15%;
+}
+.back a {
+  text-decoration: none;
+  color: #e74a3b;
+  font-size: 22px;
+  font-weight: 600;
+}
+.section-left {
+  flex-basis: 55%;
+}
+.section-right {
+  flex-basis: 25%;
+}
+.movie-title {
+  font-size: 40px;
+  color: #fff;
+}
+.movie-rating {
+  padding-left: 5px;
+  margin-top: 20px;
+  color: #79b8f3;
+  display: flex;
+}
+
+.movie-rating span {
+  margin-right: 20px;
+}
+.movie-plot {
+  margin-top: 20px;
+  line-height: 2rem;
+}
+.movie-info > div span:first-child {
+  padding: 10px 0;
+  color: #fff;
+  font-weight: 600;
+  width: 100px;
+  display: inline-block;
+}
+.movie-info > div span {
+  color: #79b8f3;
+}
+.fa-star {
+  color: #ff9300;
+}
+.fa-thumbs-up {
+  color: #fafafa;
+}
+.fa-film {
+  color: rgb(191, 213, 214);
+}
+.fa-calendar {
+  color: peachpuff;
+}
+.section-right {
+  margin-left: 30px;
 }
