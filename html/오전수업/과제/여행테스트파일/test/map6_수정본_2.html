@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 마커 */
+      #mapwrap {
+        position: relative;
+        overflow: hidden;
+      }
+      .category,
+      .category * {
+        margin: 0;
+        padding: 0;
+        color: #000;
+      }
+      .category {
+        position: absolute;
+        overflow: hidden;
+        top: 10px;
+        left: 10px;
+        width: 200px;
+        height: 50px;
+        z-index: 10;
+        border: 1px solid black;
+        font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+        font-size: 15px;
+        text-align: center;
+        background-color: #fff;
+      }
+      .category .menu_selected {
+        background: #ff5f4a;
+        color: #fff;
+        border-left: 1px solid #915b2f;
+        border-right: 1px solid #915b2f;
+        margin: 0 -1px;
+      }
+      .category li {
+        list-style: none;
+        float: left;
+        width: 50px;
+        height: 45px;
+        padding-top: 5px;
+        cursor: pointer;
+      }
+      .category .ico_comm {
+        margin: 0 auto 2px;
+        width: 12px;
+        height: 16px;
+        background: url('https://t1.daumcdn.net/mapjsapi/images/2x/marker.png')
+          no-repea t;
+      }
+      .category .ico_month {
+        background-position: -10px 0;
+      }
+      .category .ico_recommend {
+        background-position: -10px -36px;
+      }
+      .category .ico_tasty {
+        background-position: -10px -72px;
+      }
+      .category .ico_thema {
+        background-position: -10px -108px;
+      }
+      /* 커스텀 오버레이 */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .overlay_info {
+        border-radius: 6px;
+        margin-bottom: 12px;
+        float: left;
+        position: relative;
+        border: 1px solid #ccc;
+        border-bottom: 2px solid #ddd;
+        background-color: #fff;
+      }
+      .overlay_info:nth-of-type(n) {
+        border: 0;
+        box-shadow: 0px 1px 2px #888;
+      }
+      .overlay_info a {
+        display: block;
+        background: #d95050;
+        background: #d95050
+          url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
+          no-repeat right 14px center;
+        text-decoration: none;
+        color: #fff;
+        padding: 12px 36px 12px 14px;
+        /*  */
+        font-size: 25px;
+        border-radius: 6px 6px 0 0;
+      }
+
+      .overlay_info .desc {
+        padding: 10px;
+        position: relative;
+        min-width: 180px;
+        height: 76px;
+      }
+      .overlay_info img {
+        vertical-align: top;
+        width: 40px;
+        height: 76px;
+      }
+      .overlay_info .address {
+        font-size: 20px;
+        color: #333;
+        position: absolute;
+        left: 55px;
+        right: 10px;
+        top: 10px;
+        white-space: normal;
+      }
+      .overlay_info:after {
+        content: '';
+        position: absolute;
+        margin-left: -11px;
+        left: 50%;
+        bottom: -12px;
+        width: 22px;
+        height: 12px;
+        background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png)
+          no-repeat 0 bottom;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="mapwrap">
+      <!-- 지도가 표시될 div -->
+      <div id="map" style="width: 100%; height: 100vh"></div>
+      <!-- 지도 위에 표시될 마커 카테고리 -->
+      <div class="category">
+        <ul>
+          <li id="monthTour" onclick="changeMarker('month')">
+            <span class="ico_comm ico_month"></span>
+            이달의<br />여행
+          </li>
+          <li id="recommendTour" onclick="changeMarker('recommend')">
+            <span class="ico_comm ico_recommend"></span>
+            추천<br />여행
+          </li>
+          <li id="tastyTour" onclick="changeMarker('tasty')">
+            <span class="ico_comm ico_tasty"></span>
+            맛집<br />투어
+          </li>
+          <li id="themaTour" onclick="changeMarker('thema')">
+            <span class="ico_comm ico_thema"></span>
+            테마<br />여행
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=87890f41b485a550fd1383dde2f1d4c9"
+    ></script>
+    <script>
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+          center: new kakao.maps.LatLng(36.331519, 127.433637), // 지도의 중심좌표
+          level: 7, // 지도의 확대 레벨
+        };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+      var customOverlayArray = new Array();
+
+      // 이달의 여행 마커가 표시될 좌표 배열입니다
+      var monthPositions = [
+        new kakao.maps.LatLng(36.331519, 127.433637),
+        new kakao.maps.LatLng(36.2886167, 127.3969124),
+        new kakao.maps.LatLng(36.3656689, 127.3878868),
+        new kakao.maps.LatLng(36.3755897, 127.3766119),
+        new kakao.maps.LatLng(36.3605754, 127.3581569),
+      ];
+
+      // 추천여행 마커가 표시될 좌표 배열입니다
+      var recommendPositions = [
+        new kakao.maps.LatLng(36.331519, 127.433637),
+        new kakao.maps.LatLng(36.3664537, 127.383661),
+        new kakao.maps.LatLng(36.3765465, 127.388132),
+        new kakao.maps.LatLng(36.3727738, 127.4745761),
+        new kakao.maps.LatLng(36.3293875, 127.4319877),
+      ];
+
+      // 맛집투어 마커가 표시될 좌표 배열입니다
+      var tastyPositions = [
+        new kakao.maps.LatLng(36.331519, 127.433637),
+        new kakao.maps.LatLng(36.3419729, 127.4250897),
+        new kakao.maps.LatLng(36.3592139, 127.4266165),
+        new kakao.maps.LatLng(36.3526116, 127.3872618),
+        new kakao.maps.LatLng(36.3276642, 127.4272908),
+      ];
+
+      // 테마여행 마커가 표시될 좌표 배열입니다
+      var themaPositions = [
+        new kakao.maps.LatLng(36.331519, 127.433637),
+        new kakao.maps.LatLng(36.3478241, 127.4567871),
+        new kakao.maps.LatLng(36.3649667, 127.4414303),
+        new kakao.maps.LatLng(36.3436074, 127.3960741),
+        new kakao.maps.LatLng(36.3607227, 127.3783182),
+      ];
+
+      var markerImageSrc =
+        'https://t1.daumcdn.net/mapjsapi/images/2x/marker.png'; // 마커이미지의 주소입니다. 스프라이트 이미지 입니다
+      (monthMarkers = []), // 이달의 여행 마커 객체를 가지고 있을 배열입니다
+        (recommendMarkers = []), // 추천여행 마커 객체를 가지고 있을 배열입니다
+        (tastyMarkers = []), // 맛집투어 마커 객체를 가지고 있을 배열입니다
+        (themaMarkers = []); // 테마여행 마커 객체를 가지고 있을 배열입니다
+
+      createMonthMarkers(); // 이달의 여행 마커를 생성하고 커피숍 마커 배열에 추가합니다
+      createRecommendMarkers(); // 추천여행 마커를 생성하고 편의점 마커 배열에 추가합니다
+      createTastyMarkers(); // 맛집투어 마커를 생성하고 주차장 마커 배열에 추가합니다
+      createThemaMarkers(); // 테마여행 마커를 생성하고 주차장 마커 배열에 추가합니다
+
+      changeMarker('init'); // 지도에 이달의 여행 마커가 보이도록 설정합니다
+
+      // 마커이미지의 주소와, 크기, 옵션으로 마커 이미지를 생성하여 리턴하는 함수입니다
+      function createMarkerImage(src, size, options) {
+        var markerImage = new kakao.maps.MarkerImage(src, size, options);
+        return markerImage;
+      }
+
+      // 좌표와 마커이미지를 받아 마커를 생성하여 리턴하는 함수입니다
+      function createMarker(position, image) {
+        var marker = new kakao.maps.Marker({
+          position: position,
+          image: image,
+        });
+
+        return marker;
+      }
+
+      var content = '';
+      // 이달의 여행 마커를 생성하고 이달의 여행 마커 배열에 추가하는 함수입니다
+      function createMonthMarkers() {
+        for (var i = 0; i < monthPositions.length; i++) {
+          var imageSize = new kakao.maps.Size(30, 28),
+            imageOptions = {
+              spriteOrigin: new kakao.maps.Point(2, 0),
+              spriteSize: new kakao.maps.Size(26, 28),
+            };
+
+          // 마커이미지와 마커를 생성합니다
+          var markerImage = createMarkerImage(
+              markerImageSrc,
+              imageSize,
+              imageOptions,
+            ),
+            marker = createMarker(monthPositions[i], markerImage);
+
+          // 생성된 마커를 이달의 여행 마커 배열에 추가합니다
+          monthMarkers.push(marker);
+
+          var positions = [
+            // 이달의 여행
+            new kakao.maps.LatLng(36.331519, 127.433637),
+            new kakao.maps.LatLng(36.2886167, 127.3969124),
+            new kakao.maps.LatLng(36.3656689, 127.3878868),
+            new kakao.maps.LatLng(36.3755897, 127.3766119),
+            new kakao.maps.LatLng(36.3605754, 127.3581569),
+          ];
+          //   장소
+          var places = [
+            // 이달의 여행
+            'https://place.map.kakao.com/7830504',
+            'https://place.map.kakao.com/11505186',
+            'https://place.map.kakao.com/8130712',
+            'https://place.map.kakao.com/8217829',
+            'https://place.map.kakao.com/8478591',
+          ];
+          // 이미지 넣어주기
+          var images = [
+            // 이달의 여행
+            'https://lh5.googleusercontent.com/p/AF1QipO564CQNFtskz5Chi7YJhZpKw3eeK_ww2lEp5pC=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipP2LQDefthNled7iiCFcV5ONpsXxa8uBch8LUsQ=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipMKvD8zzZLzVmKZENxJsHxT-uO1hHN5LBQAr7jm=w426-h240-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipNiN-L2EqoD4VoMwIsHiZR7cJa7HEt85BLzSSNS=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipPxrf2DE_L7X_kAGmFKeF0RVE2LUyREqVmevNxG=w408-h306-k-no',
+          ];
+          var placesName = [
+            // 이달의 여행
+            '대전역',
+            '오월드 ',
+            '한밭수목원',
+            '국립중앙과학관',
+            '유림공원',
+          ];
+          var address = [
+            // 이달의 여행
+            '대전광역시 동구 중앙로 215',
+            '대전광역시 중구 사정공원로 70',
+            '대전광역시 서구 둔산대로117번길 169',
+            '대전광역시 유성구 대덕대로 481',
+            '대전광역시 유성구 어은로 27',
+          ];
+          // 커스텀오버레이
+          for (var i = 0; i < positions.length; i++) {
+            // 커스텀 오버레이에 표시할 내용입니다
+            // HTML 문자열 또는 Dom Element 입니다
+            content = '<div class="overlay_info">';
+            content +=
+              '    <a href="' +
+              places[i] +
+              '" target="_blank"><strong>' +
+              placesName[i] +
+              '</strong></a>';
+            content += '    <div class="desc">';
+            content += '        <img src="' + images[i] + '" alt="">';
+            content +=
+              '        <span class="address">' + address[i] + ' </span>';
+            content += '    </div>';
+            content += '</div>';
+            // 커스텀 오버레이를 생성합니다
+            var mapCustomOverlay = new kakao.maps.CustomOverlay({
+              position: positions[i],
+              content: content,
+              xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+              yAnchor: 1.14, // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+            });
+
+            // 커스텀 오버레이를 지도에 표시합니다
+            mapCustomOverlay.setMap(map);
+            customOverlayArray[i] = mapCustomOverlay;
+          }
+
+          /* 출발마커 */
+          var startSrc =
+              'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다
+            startSize = new kakao.maps.Size(50, 45), // 출발 마커이미지의 크기입니다
+            startOption = {
+              offset: new kakao.maps.Point(15, 43), // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+            };
+
+          // 출발 마커 이미지를 생성합니다
+          var startImage = new kakao.maps.MarkerImage(
+            startSrc,
+            startSize,
+            startOption,
+          );
+
+          // 출발 마커가 표시될 위치입니다
+          var startPosition = new kakao.maps.LatLng(36.3316264, 127.434411);
+
+          // 출발 마커를 생성합니다
+          var startMarker = new kakao.maps.Marker({
+            map: map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+            position: startPosition,
+            image: startImage, // 출발 마커이미지를 설정합니다
+          });
+
+          /* 선 잇기
+          // 이달의 여행
+          var linePath = [
+            new kakao.maps.LatLng(36.331519, 127.433637),
+            new kakao.maps.LatLng(36.2886167, 127.3969124),
+            new kakao.maps.LatLng(36.3656689, 127.3878868),
+            new kakao.maps.LatLng(36.3755897, 127.3766119),
+            new kakao.maps.LatLng(36.3605754, 127.3581569),
+            // new kakao.maps.LatLng(36.331519, 127.433637),
+          ];
+          // 지도에 표시할 선을 생성합니다
+          var polyline = new kakao.maps.Polyline({
+            path: linePath, // 선을 구성하는 좌표배열 입니다
+            strokeWeight: 5, // 선의 두께 입니다
+            strokeColor: '#0033ff', // 선의 색깔입니다
+            strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid', // 선의 스타일입니다
+          });
+          // 지도에 선을 표시합니다
+          polyline.setMap(map);
+          */
+        }
+      }
+
+      // 이달의 여행 마커들의 지도 표시 여부를 설정하는 함수입니다
+      function setMonthMarkers(map) {
+        for (var i = 0; i < monthMarkers.length; i++) {
+          monthMarkers[i].setMap(map);
+        }
+      }
+
+      /* 추천여행*/
+
+      // 추천여행 마커를 생성하고 추천여행 마커 배열에 추가하는 함수입니다
+      function createRecommendMarkers() {
+        for (var i = 0; i < recommendPositions.length; i++) {
+          var imageSize = new kakao.maps.Size(30, 28),
+            imageOptions = {
+              spriteOrigin: new kakao.maps.Point(2, 0),
+              spriteSize: new kakao.maps.Size(26, 28),
+            };
+
+          // 마커이미지와 마커를 생성합니다
+          var markerImage = createMarkerImage(
+              markerImageSrc,
+              imageSize,
+              imageOptions,
+            ),
+            marker = createMarker(recommendPositions[i], markerImage);
+
+          // 생성된 마커를 추천여행 마커 배열에 추가합니다
+          recommendMarkers.push(marker);
+
+          var positions2 = [
+            // 추천 여행
+            new kakao.maps.LatLng(36.331519, 127.433637),
+            new kakao.maps.LatLng(36.3664537, 127.383661),
+            new kakao.maps.LatLng(36.3765465, 127.388132),
+            new kakao.maps.LatLng(36.3727738, 127.4745761),
+            new kakao.maps.LatLng(36.3293875, 127.4319877),
+            new kakao.maps.LatLng(36.3605754, 127.3581569),
+          ];
+          //   장소
+          var places2 = [
+            // 추천 여행
+            'https://place.map.kakao.com/7829860',
+            'https://place.map.kakao.com/26363151',
+            'https://place.map.kakao.com/1386162489',
+            'https://place.map.kakao.com/1408703362',
+            'https://place.map.kakao.com/7830504',
+          ];
+          // 이미지 넣어주기
+          var images2 = [
+            // 추천 여행
+            'https://lh5.googleusercontent.com/p/AF1QipO564CQNFtskz5Chi7YJhZpKw3eeK_ww2lEp5pC=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipPNj1A20CmoL815N_9cmAkrrezT_ALuEy8CWJHm=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipMzrsvaDuIcad9JLN6aFHJ3UCTyf2ZSvIWqHA1P=w408-h725-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipOtqUZXZ_vB7r6MQE7ym2Jox9K9Uwi4NIQQcJ9W=w408-h272-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipNtPl4wiWP5ZmShu-ZXer0HYZP9s2O3a3On1v9u=w408-h306-k-no',
+          ];
+          var placesName2 = [
+            // 추천 여행
+            '대전역',
+            '예술의 전당',
+            '한빛탑',
+            '대청호',
+            '중앙시장',
+          ];
+          var address2 = [
+            // 추천 여행
+            '대전광역시 동구 중앙로 215',
+            '대전광역시 서구 둔산대로117번길 135',
+            '대전광역시 유성구 대덕대로 480',
+            '대전광역시 동구 추동 328',
+            '대전광역시 동구 대전로 783',
+          ];
+          // 커스텀오버레이
+          for (var i = 0; i < positions2.length; i++) {
+            // 커스텀 오버레이에 표시할 내용입니다
+            // HTML 문자열 또는 Dom Element 입니다
+            content = '<div class="overlay_info">';
+            content +=
+              '    <a href="' +
+              places2[i] +
+              '" target="_blank"><strong>' +
+              placesName2[i] +
+              '</strong></a>';
+            content += '    <div class="desc">';
+            content += '        <img src="' + images2[i] + '" alt="">';
+            content +=
+              '        <span class="address">' + address2[i] + ' </span>';
+            content += '    </div>';
+            content += '</div>';
+            // 커스텀 오버레이를 생성합니다
+            var mapCustomOverlay = new kakao.maps.CustomOverlay({
+              position: positions2[i],
+              content: content,
+              xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+              yAnchor: 1.14, // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+            });
+
+            // 커스텀 오버레이를 지도에 표시합니다
+            mapCustomOverlay.setMap(map);
+            customOverlayArray[i] = mapCustomOverlay;
+          }
+
+          /* 출발마커 */
+          var startSrc =
+              'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다
+            startSize = new kakao.maps.Size(50, 45), // 출발 마커이미지의 크기입니다
+            startOption = {
+              offset: new kakao.maps.Point(15, 43), // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+            };
+
+          // 출발 마커 이미지를 생성합니다
+          var startImage = new kakao.maps.MarkerImage(
+            startSrc,
+            startSize,
+            startOption,
+          );
+
+          // 출발 마커가 표시될 위치입니다
+          var startPosition = new kakao.maps.LatLng(36.3316264, 127.434411);
+
+          // 출발 마커를 생성합니다
+          var startMarker = new kakao.maps.Marker({
+            map: map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+            position: startPosition,
+            image: startImage, // 출발 마커이미지를 설정합니다
+          });
+
+          /* 선 잇기
+          // 추천 여행
+          var linePath2 = [
+            new kakao.maps.LatLng(36.331519, 127.433637),
+            new kakao.maps.LatLng(36.2886167, 127.3969124),
+            new kakao.maps.LatLng(36.3656689, 127.3878868),
+            new kakao.maps.LatLng(36.3755897, 127.3766119),
+            new kakao.maps.LatLng(36.3605754, 127.3581569),
+            // new kakao.maps.LatLng(36.331519, 127.433637),
+          ];
+          // 지도에 표시할 선을 생성합니다
+          var polyline2 = new kakao.maps.polyline2({
+            path: linePath2, // 선을 구성하는 좌표배열 입니다
+            strokeWeight: 5, // 선의 두께 입니다
+            strokeColor: '#0033ff', // 선의 색깔입니다
+            strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid', // 선의 스타일입니다
+          });
+          // 지도에 선을 표시합니다
+          polyline2.setMap(map);
+          */
+        }
+      }
+
+      // 추천여행 마커들의 지도 표시 여부를 설정하는 함수입니다
+      function setRecommendMarkers(map) {
+        for (var i = 0; i < recommendMarkers.length; i++) {
+          recommendMarkers[i].setMap(map);
+        }
+      }
+
+      /* 맛집투어 */
+
+      // 맛집투어 마커를 생성하고 맛집투어 마커 배열에 추가하는 함수입니다
+      function createTastyMarkers() {
+        for (var i = 0; i < tastyPositions.length; i++) {
+          var imageSize = new kakao.maps.Size(30, 28),
+            imageOptions = {
+              spriteOrigin: new kakao.maps.Point(2, 0),
+              spriteSize: new kakao.maps.Size(26, 28),
+            };
+
+          // 마커이미지와 마커를 생성합니다
+          var markerImage = createMarkerImage(
+              markerImageSrc,
+              imageSize,
+              imageOptions,
+            ),
+            marker = createMarker(tastyPositions[i], markerImage);
+
+          // 생성된 마커를 맛집투어 마커 배열에 추가합니다
+          tastyMarkers.push(marker);
+
+          var positions3 = [
+            // 맛집투어
+            new kakao.maps.LatLng(36.331519, 127.433637),
+            new kakao.maps.LatLng(36.3419729, 127.4250897),
+            new kakao.maps.LatLng(36.3592139, 127.4266165),
+            new kakao.maps.LatLng(36.3526116, 127.3872618),
+            new kakao.maps.LatLng(36.3276642, 127.4272908),
+          ];
+          //   장소
+          var places3 = [
+            // 맛집투어
+            'https://place.map.kakao.com/16302660',
+            'https://place.map.kakao.com/26975999',
+            'https://place.map.kakao.com/1746986738',
+            'https://place.map.kakao.com/17733090',
+            'https://place.map.kakao.com/7830504',
+          ];
+          // 이미지 넣어주기
+          var images3 = [
+            // 맛집투어
+            'https://lh5.googleusercontent.com/p/AF1QipO564CQNFtskz5Chi7YJhZpKw3eeK_ww2lEp5pC=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipO8qxGed2LBz-EhaDCf0G0HKnf4o8Lx47Zh6ruF=w408-h544-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipMzCEyQVGaqC5CkEESfocaVYxSWwapD3VRyOZo1=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipNePDIl57vjz6mqoDGFofJqhauhuJI6GFfK_b7G=w426-h240-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipMJY39G1fj04fSFb9JqTf5Zq3-vEzfrGfCjCtB4=w408-h306-k-no',
+          ];
+          var placesName3 = [
+            // 맛집투어
+            '대전역',
+            '오씨칼국수',
+            '오문창순대국밥',
+            '수복삼계탕',
+            '성심당본점',
+          ];
+          var address3 = [
+            // 맛집투어
+            '대전광역시 동구 중앙로 215',
+            '대전광역시 동구 옛신탄진로 13',
+            '대전광역시 대덕구 한밭대로 1153',
+            '대전 서구 둔산중로 66',
+            '대전광역시 중구 대종로480번길 15',
+          ];
+          // 커스텀오버레이
+          for (var i = 0; i < positions3.length; i++) {
+            // 커스텀 오버레이에 표시할 내용입니다
+            // HTML 문자열 또는 Dom Element 입니다
+            content = '<div class="overlay_info">';
+            content +=
+              '    <a href="' +
+              places3[i] +
+              '" target="_blank"><strong>' +
+              placesName3[i] +
+              '</strong></a>';
+            content += '    <div class="desc">';
+            content += '        <img src="' + images3[i] + '" alt="">';
+            content +=
+              '        <span class="address">' + address3[i] + ' </span>';
+            content += '    </div>';
+            content += '</div>';
+            // 커스텀 오버레이를 생성합니다
+            var mapCustomOverlay = new kakao.maps.CustomOverlay({
+              position: positions3[i],
+              content: content,
+              xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+              yAnchor: 1.14, // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+            });
+
+            // 커스텀 오버레이를 지도에 표시합니다
+            mapCustomOverlay.setMap(map);
+            customOverlayArray[i] = mapCustomOverlay;
+          }
+
+          /* 출발마커 */
+          var startSrc =
+              'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다
+            startSize = new kakao.maps.Size(50, 45), // 출발 마커이미지의 크기입니다
+            startOption = {
+              offset: new kakao.maps.Point(15, 43), // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+            };
+
+          // 출발 마커 이미지를 생성합니다
+          var startImage = new kakao.maps.MarkerImage(
+            startSrc,
+            startSize,
+            startOption,
+          );
+
+          // 출발 마커가 표시될 위치입니다
+          var startPosition = new kakao.maps.LatLng(36.3316264, 127.434411);
+
+          // 출발 마커를 생성합니다
+          var startMarker = new kakao.maps.Marker({
+            map: map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+            position: startPosition,
+            image: startImage, // 출발 마커이미지를 설정합니다
+          });
+
+          /* 선 잇기
+          // 맛집투어
+          var linePath3 = [
+            new kakao.maps.LatLng(36.331519, 127.433637),
+            new kakao.maps.LatLng(36.3419729, 127.4250897),
+            new kakao.maps.LatLng(36.3592139, 127.4266165),
+            new kakao.maps.LatLng(36.3526116, 127.3872618),
+            new kakao.maps.LatLng(36.3276642, 127.4272908),
+            // new kakao.maps.LatLng(36.331519, 127.433637),
+          ];
+          // 지도에 표시할 선을 생성합니다
+          var polyline3 = new kakao.maps.Polyline3({
+            path: linePath3, // 선을 구성하는 좌표배열 입니다
+            strokeWeight: 5, // 선의 두께 입니다
+            strokeColor: '#0033ff', // 선의 색깔입니다
+            strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid', // 선의 스타일입니다
+          });
+          // 지도에 선을 표시합니다
+          polyline3.setMap(map);
+          */
+        }
+      }
+
+      // 맛집투어 마커들의 지도 표시 여부를 설정하는 함수입니다
+      function setTastyMarkers(map) {
+        for (var i = 0; i < tastyMarkers.length; i++) {
+          tastyMarkers[i].setMap(map);
+        }
+      }
+
+      /* 테마여행 */
+
+      // 테마여행 마커를 생성하고 테마여행 마커 배열에 추가하는 함수입니다
+      function createThemaMarkers() {
+        for (var i = 0; i < themaPositions.length; i++) {
+          var imageSize = new kakao.maps.Size(30, 28),
+            imageOptions = {
+              spriteOrigin: new kakao.maps.Point(2, 0),
+              spriteSize: new kakao.maps.Size(26, 28),
+            };
+
+          // 마커이미지와 마커를 생성합니다
+          var markerImage = createMarkerImage(
+              markerImageSrc,
+              imageSize,
+              imageOptions,
+            ),
+            marker = createMarker(themaPositions[i], markerImage);
+
+          // 생성된 마커를 테마여행 마커 배열에 추가합니다
+          themaMarkers.push(marker);
+
+          var positions4 = [
+            // 테마여행
+            new kakao.maps.LatLng(36.331519, 127.433637),
+            new kakao.maps.LatLng(36.3478241, 127.4567871),
+            new kakao.maps.LatLng(36.3649667, 127.4414303),
+            new kakao.maps.LatLng(36.3436074, 127.3960741),
+            new kakao.maps.LatLng(36.3607227, 127.3783182),
+          ];
+          //   장소
+          var places4 = [
+            // 테마여행
+            'https://place.map.kakao.com/8027006',
+            'https://place.map.kakao.com/11095487',
+            'https://place.map.kakao.com/12683395',
+            'https://place.map.kakao.com/10679334',
+            'https://place.map.kakao.com/7830504',
+          ];
+          // 이미지 넣어주기
+          var images4 = [
+            // 테마여행
+            'https://lh5.googleusercontent.com/p/AF1QipO564CQNFtskz5Chi7YJhZpKw3eeK_ww2lEp5pC=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipNldX_PRjAsFkzpG_Wzue6aNeMfM0gKA6tPuMZI=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipO5X3qw6dWXel7vyIi083cABsfkzXXLhtX_wbKl=w426-h240-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipPJj7gMETkINOQHEtBBZUJbdCXIu5AKYPxWJflT=w408-h306-k-no',
+            'https://lh5.googleusercontent.com/p/AF1QipNjtL1sSUzz5rq8ZMgS3Edz5o3aeLuC8_M79qTX=w408-h306-k-no',
+          ];
+          var placesName4 = [
+            // 테마여행
+            '대전역',
+            '우암사적공원',
+            '동춘당역사공원',
+            '도산서원',
+            '둔산선사유적지',
+          ];
+          var address4 = [
+            // 테마여행
+            '대전광역시 동구 중앙로 215',
+            '대전 동구 충정로 53',
+            '대전 대덕구 동춘당로 90',
+            '대전 서구 남선로 8',
+            '대전 서구 대덕대로317번길 9',
+          ];
+          // 커스텀오버레이
+          for (var i = 0; i < positions4.length; i++) {
+            // 커스텀 오버레이에 표시할 내용입니다
+            // HTML 문자열 또는 Dom Element 입니다
+            content = '<div class="overlay_info">';
+            content +=
+              '    <a href="' +
+              places4[i] +
+              '" target="_blank"><strong>' +
+              placesName4[i] +
+              '</strong></a>';
+            content += '    <div class="desc">';
+            content += '        <img src="' + images4[i] + '" alt="">';
+            content +=
+              '        <span class="address">' + address4[i] + ' </span>';
+            content += '    </div>';
+            content += '</div>';
+            // 커스텀 오버레이를 생성합니다
+            var mapCustomOverlay = new kakao.maps.CustomOverlay({
+              position: positions4[i],
+              content: content,
+              xAnchor: 0.5, // 커스텀 오버레이의 x축 위치입니다. 1에 가까울수록 왼쪽에 위치합니다. 기본값은 0.5 입니다
+              yAnchor: 1.14, // 커스텀 오버레이의 y축 위치입니다. 1에 가까울수록 위쪽에 위치합니다. 기본값은 0.5 입니다
+            });
+
+            // 커스텀 오버레이를 지도에 표시합니다
+            mapCustomOverlay.setMap(map);
+            customOverlayArray[i] = mapCustomOverlay;
+          }
+
+          /* 출발마커 */
+          var startSrc =
+              'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png', // 출발 마커이미지의 주소입니다
+            startSize = new kakao.maps.Size(50, 45), // 출발 마커이미지의 크기입니다
+            startOption = {
+              offset: new kakao.maps.Point(15, 43), // 출발 마커이미지에서 마커의 좌표에 일치시킬 좌표를 설정합니다 (기본값은 이미지의 가운데 아래입니다)
+            };
+
+          // 출발 마커 이미지를 생성합니다
+          var startImage = new kakao.maps.MarkerImage(
+            startSrc,
+            startSize,
+            startOption,
+          );
+
+          // 출발 마커가 표시될 위치입니다
+          var startPosition = new kakao.maps.LatLng(36.3316264, 127.434411);
+
+          // 출발 마커를 생성합니다
+          var startMarker = new kakao.maps.Marker({
+            map: map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+            position: startPosition,
+            image: startImage, // 출발 마커이미지를 설정합니다
+          });
+
+          /* 선 잇기
+          // 테마여행
+          var linePath4 = [
+            new kakao.maps.LatLng(36.331519, 127.433637),
+            new kakao.maps.LatLng(36.3478241, 127.4567871),
+            new kakao.maps.LatLng(36.3649667, 127.4414303),
+            new kakao.maps.LatLng(36.3436074, 127.3960741),
+            new kakao.maps.LatLng(36.3607227, 127.3783182),
+            // new kakao.maps.LatLng(36.331519, 127.433637),
+          ];
+          // 지도에 표시할 선을 생성합니다
+          var polyline4 = new kakao.maps.Polyline4({
+            path: linePath4, // 선을 구성하는 좌표배열 입니다
+            strokeWeight: 5, // 선의 두께 입니다thTour
+            strokeColor: '#0033ff', // 선의 색깔입니다
+            strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+            strokeStyle: 'solid', // 선의 스타일입니다
+          });
+          // 지도에 선을 표시합니다
+          polyline4.setMap(map);
+          */
+        }
+      }
+      // 테마여행 마커들의 지도 표시 여부를 설정하는 함수입니다
+      function setThemaMarkers(map) {
+        for (var i = 0; i < themaMarkers.length; i++) {
+          themaMarkers[i].setMap(map);
+        }
+      }
+      // 카테고리를 클릭했을 때 type에 따라 카테고리의 스타일과 지도에 표시되는 마커를 변경합니다
+      function changeMarker(type) {
+        var monthTour = document.getElementById('monthTour');
+        var recommendTour = document.getElementById('recommendTour');
+        var tastyTour = document.getElementById('tastyTour');
+        var themaTour = document.getElementById('themaTour');
+
+        // 이달의 여행 카테고리가 클릭됐을 때
+        if (type === 'init') {
+          // 이달의 여행 카테고리를 선택된 스타일로 변경하고
+          monthTour.className = 'menu_selected';
+          // 추천여행,맛집투어,테마여행 카테고리는 선택되지 않은 스타일로 바꿉니다
+          recommendTour.className = '';
+          tastyTour.className = '';
+          themaTour.className = '';
+          // 이달의 여행 마커들만 지도에 표시하도록 설정합니다
+          setMonthMarkers(map);
+          setRecommendMarkers(null);
+          setTastyMarkers(null);
+          setThemaMarkers(null);
+        } else if (type === 'recommend') {
+          closeOverLay();
+          // 추천여행 카테고리를 선택된 스타일로 변경하고
+          monthTour.className = '';
+          recommendTour.className = 'menu_selected';
+          tastyTour.className = '';
+          themaTour.className = '';
+
+          // 추천여행 마커들만 지도에 표시하도록 설정합니다
+          setMonthMarkers(null);
+          setRecommendMarkers(map);
+          setTastyMarkers(null);
+          setThemaMarkers(null);
+        } else if (type === 'tasty') {
+          closeOverLay();
+          // 맛집투어 카테고리가 클릭됐을 때
+          // 맛집투어 카테고리를 선택된 스타일로 변경하고
+          monthTour.className = '';
+          recommendTour.className = '';
+          tastyTour.className = 'menu_selected';
+          themaTour.className = '';
+
+          // 맛집투어 마커들만 지도에 표시하도록 설정합니다
+          setMonthMarkers(null);
+          setRecommendMarkers(null);
+          setTastyMarkers(map);
+          setThemaMarkers(null);
+        } else if (type === 'thema') {
+          closeOverLay();
+          // 테마여행 카테고리가 클릭됐을 때
+          // 테마여행 카테고리를 선택된 스타일로 변경하고
+          monthTour.className = '';
+          recommendTour.className = '';
+          tastyTour.className = '';
+          themaTour.className = 'menu_selected';
+
+          // 테마여행 마커들만 지도에 표시하도록 설정합니다
+          setMonthMarkers(null);
+          setRecommendMarkers(null);
+          setTastyMarkers(null);
+          setThemaMarkers(map);
+        } else if (type === 'month') {
+          closeOverLay();
+          // 이달의 여행 카테고리를 선택된 스타일로 변경하고
+          monthTour.className = 'menu_selected';
+
+          // 추천여행,맛집투어,테마여행 카테고리는 선택되지 않은 스타일로 바꿉니다
+          recommendTour.className = '';
+          tastyTour.className = '';
+          themaTour.className = '';
+
+          // 이달의 여행 마커들만 지도에 표시하도록 설정합니다
+          setMonthMarkers(map);
+          setRecommendMarkers(null);
+          setTastyMarkers(null);
+          setThemaMarkers(null);
+        }
+      }
+      function closeOverLay() {
+        for (var i = 0; i < customOverlayArray.length; i++) {
+          customOverlayArray[i].setMap(null);
+        }
+      }
+    </script>
+  </body>
+</html>
