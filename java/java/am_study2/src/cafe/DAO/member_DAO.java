@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import cafe.VO.member;
+import cafe.main.cafe_main;
+
 public class member_DAO {
 	
 	private Connection conn=null; // 데이터베이스 연결정보를 저장
@@ -19,6 +22,49 @@ public class member_DAO {
 		connect();
 		table_check();
 	}
+	
+	// 로그인
+	public boolean login(String id, String pw) {
+		// id, pw 두개다 일치해야 로그인 되므로 -> and
+		String sql = "select * from member where id=? and tel=?";
+		// member 테이블에서 id와 tel 일치하는가 확인		
+		try {
+			pt = conn.prepareStatement(sql); // 미완성의 sql문 넣어주기
+			pt.setString(1, id);
+			pt.setString(2, pw);
+			rs = pt.executeQuery();
+			if(rs.next()) { // id와 tel이 일치하는 정보라면 로그인 성공
+				cafe_main.user = new member(rs.getString(1), 
+						rs.getString(2), rs.getString(3),rs.getString(4));
+				return false;
+			}
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		return true; // id, pw 잘못되어서 로그인 실패
+	}
+	
+	
+	
+	// id_check 메서드를 통해 아이디와 이메일의 중복여부 확인
+	// 중복이면 회원가입 안됨
+	public boolean id_check(String id, String email) {
+		String sql = "select * from member where id=? or email=?";
+		// member 테이블에서 입력받은 id 또는 email 이 있냐?
+			
+		try {
+			pt = conn.prepareStatement(sql);
+			pt.setString(1, id);
+			pt.setString(2, email);
+			rs = pt.executeQuery();
+			if(rs.next()) { // id 또는 email이 있다면 rs.next()에는 값이 있다 , 그럼 중복
+				return true;
+			}
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		return false; // rs에 값이 없다면 가입하지 않은 id 또는 email
+		}
 	
 	// 어디서든 사용할 수 있는 메서드, 저장하는 메서드 만들기
 	public boolean member_insert(String id, String name, String tel, String email) {
@@ -102,8 +148,8 @@ public class member_DAO {
 		}
 		// Class.forName("Cafe.control.order");
 	}
-}
 
+}
 /*
 	자바 - 데이터베이스 연결
 	
