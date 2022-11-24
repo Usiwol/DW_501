@@ -5,8 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,11 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
  * 
  * Controller는 페이지(html) 이동
  * RestController는 데이터(JSON) 전송
+ * 
+ * Controller는 사용자 요청(URL 요청)을 처리하는 class
+ * Controller에서 로직을 구현 X1
  */
 
 // Rest : 자원 (== 데이터)
 @RestController
 public class ApiController {
+	
+	// @Autowired : Springㅇ에서 객체를 관리함(IoC : Inversion of Control 제어 역전)
+	@Autowired
+	ApiService apiService;
+	
+	// 위와 같음
+	// ApiService apiService = new ApiService(); // 클래스를 전역변수로
+	
 	/*
 	 * 클래스 이름 : 앞에 대문자로 시작 ex) Apple(o) apple(x)
 	 * 변수 명 : 상수를 제외한 변수 이름은 소문자  String name(o) String Name(x)
@@ -27,6 +41,7 @@ public class ApiController {
 	 * 함수 이름 : 명사(x) 동사(o) ex) function makeData(o) function data(x)
 	*/
 
+	private Object movie2;
 	// v1 -> 버전을 의미함
 	@GetMapping("/api/v1/sample")
 	public List<String> callData(){
@@ -54,14 +69,16 @@ public class ApiController {
 		movie.setYear("2005");
 		movie.setRuntime("96 min");
 		movie.setGenre("Comedy, Romance");
-		
-		
+				
 		return movie;
 	}
 	//URL 이름은 중복될 수 없다.
 	@GetMapping("/api/v1/movies")
 	public List<Movie> callMovies(){
-	      
+		
+		return apiService.makeMovies();
+		
+ /*	      
 		List<Movie> list = new ArrayList<Movie>();
 	      
 	      Movie movie = new Movie();
@@ -80,6 +97,7 @@ public class ApiController {
 	      list.add(movie2);
 	      
 	      return list;
+*/	      
 	   }
 	   
 	//URL을 이용한 데이터 받는 방법
@@ -111,7 +129,18 @@ public class ApiController {
 	      
 	        return map;
 	   }
+	
+	// Post : 데이터를 받아서 생성할 때
+	@PostMapping("/api/v1/join")
+	public boolean callJoin(@RequestBody Login login) {
+		System.out.println("HTML에서 서버로 받아온 데이터입니다.");
+		System.out.println("아이디 : " + login.getUid());
+		System.out.println("이메일 : " + login.getEmail_id());
+		System.out.println("비밀번호 : " + login.getPw());
+		
+		return true;
 	}
+}
 	
 
       
