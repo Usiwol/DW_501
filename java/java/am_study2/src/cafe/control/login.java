@@ -14,7 +14,7 @@ public class login implements menu_able {
 		
 		boolean chk=true;
 		
-		do {
+		do { 
 			System.out.println("아이디 : ");
 				id = sc.nextLine();
 			System.out.println("비밀번호 : ");

@@ -18,8 +18,6 @@ public class member_DAO {
 	private ResultSet rs=null; // sql 질의문 조회 결과를 저장
 	
 	public member_DAO() { //기본 생성자 메서드
-		DriverLoad();
-		connect();
 		table_check();
 	}
 	
@@ -35,7 +33,7 @@ public class member_DAO {
 			rs = pt.executeQuery();
 			if(rs.next()) { // id와 tel이 일치하는 정보라면 로그인 성공
 				cafe_main.user = new member(rs.getString(1), 
-						rs.getString(2), rs.getString(3),rs.getString(4));
+						rs.getString(2), rs.getString(3),rs.getString(4),rs.getInt(5));
 				return false;
 			}
 		} catch(SQLException e){
@@ -119,34 +117,6 @@ public class member_DAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-		
-	private void connect() {
-		// DB주소 : jdbc:mysql: // 데이터베이스서버주소 : mysql-port/DB명
-		String url = "jdbc:mysql://localhost:3306/dw_501";
-		String user = "root"; // mysql 계정명
-		String pass = "06251003"; // mysql 계정 비번
-		try {
-			conn = DriverManager.getConnection(url,user,pass);			
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("접속 실패");
-		}
-	}
-
-	// 드라이버 로드라는 작업은 해당 데이터베이스와 연결해주는 
-	// 클래스를 컴퓨터 메모리에 로드(적재, 올린다.) 해주는 작업이다.
-	
-	private void DriverLoad() {
-		// 각 데이터베이스마다 경로가 다르다.
-		// 예외처리 해줘야 빨간줄이 사라진다.
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver"); // 문자열을 클래스화 해준다.
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("드라이버 로드 실패");
-		}
-		// Class.forName("Cafe.control.order");
 	}
 
 }

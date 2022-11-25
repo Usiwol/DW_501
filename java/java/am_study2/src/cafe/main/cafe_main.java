@@ -17,7 +17,8 @@ public class cafe_main {
 	
 	public static void main(String[] args) {
 		// 인터페이스 사용시
-		menu_able[] menu = {new order(), new login(), new event(), new signin(), new exit()};
+		menu_able[] menu = {new order(), new login(), 
+				new event(), new signin(), new exit()};
 	
 		// 무한루프
 		// 인터페이스 사용시
