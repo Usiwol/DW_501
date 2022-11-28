@@ -47,6 +47,11 @@ public class PageController {
 		return "login2";
 	}
 	
+	@GetMapping("/emp")
+	public String callEmpPage() {
+		return "emp";
+	}
+	
 }
 
 

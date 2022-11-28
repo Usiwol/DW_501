@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.mapper.EmpMapper;
 import com.example.demo.service.ApiService;
+import com.example.demo.vo.EmpVO;
 import com.example.demo.vo.Login;
 import com.example.demo.vo.Login2;
 import com.example.demo.vo.Movie;
@@ -34,9 +36,12 @@ import com.example.demo.vo.Movie;
 @RestController
 public class ApiController {
 	
-	// @Autowired : Springㅇ에서 객체를 관리함(IoC : Inversion of Control 제어 역전)
+	// @Autowired : Spring에서 객체를 관리함(IoC : Inversion of Control 제어 역전)
 	@Autowired
-	ApiService apiService;
+	ApiService apiService; // 클래스를 전역변수로
+	
+	@Autowired
+	EmpMapper empMapper;
 	
 	// 위와 같음
 	// ApiService apiService = new ApiService(); // 클래스를 전역변수로
@@ -169,6 +174,10 @@ public class ApiController {
 		return true;
 	}
 	
+	@GetMapping("/api/v1/emp")
+	public List<EmpVO> callEmp(){
+		return empMapper.selectEmp();
+	}
 	
 	
 	
