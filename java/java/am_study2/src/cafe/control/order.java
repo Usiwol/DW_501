@@ -19,7 +19,6 @@ public class order implements menu_able {
 			food.order_food( menu() );
 		}
 		
-		
 		return true;
 	}
 	
@@ -28,10 +27,12 @@ public class order implements menu_able {
 	            "순두부찌개","불족발","당당치킨","까르보나","마라탕","부대찌개"};
 		
 		int i=1;
-		for(String m : mlist)
+		for(String m : mlist) {
 			System.out.println(i+". "+m);
-		
+			i++;
+		}
 		System.out.println("선택 : ");
+	
 		return new Scanner(System.in).nextInt();
 	}
 }

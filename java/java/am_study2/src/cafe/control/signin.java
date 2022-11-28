@@ -12,7 +12,7 @@ public class signin implements menu_able{
 		
 		Scanner sc = new Scanner(System.in);	
 		member_service ms = new member_service();
-		String id=null, name=null, tel=null, email=null;
+		String id=null, name=null, tel=null, email=null, allergy;
 		do {
 		
 		System.out.println("회원가입 양식");
@@ -27,11 +27,13 @@ public class signin implements menu_able{
 			tel = sc.nextLine();
 		System.out.println("이메일 : ");
 			email = sc.nextLine();
-				
+		System.out.println("알레르기(알레르기가 없다면 x) : ");	
+			allergy = sc.nextLine();
+			
 		//======== 입력 항목 ============
 		
 		
-		}while ( !(ms.sign_member(id, name, tel, email)) );
+		}while ( !(ms.sign_member(id, name, tel, email, allergy)) );
 		
 		return true;
 	}
