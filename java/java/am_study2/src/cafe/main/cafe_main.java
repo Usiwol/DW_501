@@ -8,6 +8,7 @@ import cafe.control.event;
 import cafe.control.exit;
 import cafe.control.login;
 import cafe.control.menu_able;
+import cafe.control.myinfo;
 import cafe.control.order;
 import cafe.control.signin;
 
@@ -17,8 +18,8 @@ public class cafe_main {
 	
 	public static void main(String[] args) {
 		// 인터페이스 사용시
-		menu_able[] menu = {new order(), new login(), 
-				new event(), new signin(), new exit()};
+		menu_able[] menu = {new order(), new myinfo(),  
+				new event(), new login(), new signin(), new exit()};
 	
 		// 무한루프
 		// 인터페이스 사용시
@@ -28,10 +29,10 @@ public class cafe_main {
 	public static int main_menu() { // 클래스 메서드 - 클래스 메서드에서만 사용
 		int select = 0;
 		
-		String[] menu = {"주문", "로그인", "이벤트", "회원가입", "종료"};
+		String[] menu = {"주문", "내정보", "이벤트", "로그인", "회원가입", "종료"};
 			try {
 				for(int i=1; i<=menu.length; i++) {
-					if(user!=null && ( i==2 || i==4 ))
+					if(user!=null && ( i==4 || i==5 ))
 						continue;
 					System.out.println(i+". "+menu[i-1]);
 				}
@@ -44,7 +45,7 @@ public class cafe_main {
 				*/
 				System.out.println("선택 : ");
 				select = sc.nextInt();
-				if( select < 1 || select > 5 )
+				if( select < 1 || select > 6 )
 					// throw : 강제로 오류내는 것
 					throw new InputMismatchException("잘못입력했습니다.");
 			}catch(Exception e) {

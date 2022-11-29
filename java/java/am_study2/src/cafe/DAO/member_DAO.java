@@ -9,8 +9,7 @@ import java.sql.Statement;
 import cafe.VO.member;
 import cafe.main.cafe_main;
 
-public class member_DAO extends base_DAO {
-	
+public class member_DAO extends base_DAO {	
 //	private Connection conn=null; // 데이터베이스 연결정보를 저장
 //	private Statement st=null; // sql 질의문을 데이터베이스에 전달 // Statement : 문자열 그대로 전달
 //	private PreparedStatement pt=null; // sql 질의문을 데이터베이스에 전달

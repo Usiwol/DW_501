@@ -16,7 +16,7 @@ public class order implements menu_able {
 		if(cafe_main.user==null) {
 			System.out.println("로그인을 먼저해주세요.");
 		}else {
-			food.order_food( menu() );
+			while(food.order_food( menu() )); //주문 처리하는 곳 
 		}
 		
 		return true;

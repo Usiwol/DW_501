@@ -1,12 +1,67 @@
 package cafe.DAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import cafe.VO.food;
+import cafe.VO.order_list;
 
 public class food_DAO extends base_DAO {
+	
+	//주문내역
+	public List<order_list> order_select(String id){
+		List<order_list> list = new ArrayList<>(); 
+		// 주문내역이 여러개 존재할 수 있기에 배열형태로 저장하기 위해 ArrayList 사용
+		
+		String sql = "select * from order_list where an_order=?";
+		try {
+			pt = conn.prepareStatement(sql);
+			pt.setString(1, id);
+			rs = pt.executeQuery();
+			while(rs.next()) {
+				order_list data = new order_list(
+						rs.getInt("order_seq"), rs.getString("food_name"), rs.getString("an_order"),
+						rs.getInt("order_price"), rs.getInt("delivery_complete"), rs.getString("memo")
+						);
+			//DB에서 가저온 데이터들을 order_list객체로 하나씩하나씩 생성해주고 ArrayList 에 저장하긱
+				list.add(data);
+			}
+			//반복문 종료되면 DB에서 가져온 모든 데이터를 저장해 주었다는 것
+			return list;
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	public boolean order_insert(order_list data) {
+		//매개변수를 order_list한 이유는 food_service에서 주문 내용들을 order_list의
+		//객체에 저장하였기에 DB에 저장하려면 order_list객체의 값을 가져와서 저장해야 한다.
+		//DB저장하기
+		//1. sql문 작성하기
+		//2. 자바에서 DB에 전달하기 위한 statement나 preparedStatement에 sql문 넣어주기(컬럼명 넣기)
+		String sql="insert into order_list(food_name, an_order,order_price, memo) "
+				+ "values(?,?,?,?) ";
+		
+		try {
+			pt = conn.prepareStatement(sql);
+			pt.setString(1,  data.getFood_name());
+			pt.setString(2, data.getAn_order());
+			pt.setInt(3, data.getPrice());
+			pt.setString(4, data.getMemo());
+			pt.executeUpdate(); //query - select, 조회,	 update - 변경, 추가, 삭제
+			return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 
 	public Map<Integer, food> food_list() {
 		
@@ -23,17 +78,16 @@ public class food_DAO extends base_DAO {
 						rs.getInt("cost"), rs.getInt("cook_time"), rs.getInt("cal"), 
 						rs.getString("allergy"), rs.getInt("order_quantity") );
 				
-				food_map.put(data.getFood_seq(), data);
-				
+				food_map.put(data.getFood_seq(), data);			
 			}
 			return food_map;
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 		return null;
 	}
+
 }
 
 
