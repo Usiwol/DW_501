@@ -14,13 +14,35 @@ h2{
 	margin-bottom: 30px;
 	text-align: center;
 }
+#input_wrap{
+	margin: 0 auto;
+	padding: 0;
+	width: 1200px;
+	height: 50px;
+	text-align: center;
+}
+.input{
+	width: 210px;
+	height: 25px;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding-left: 10px;
+	font-size: 15px;
+}
+button{
+	width: 220px;
+	height: 30px;
+	background: hotpink;
+	border: 0;
+	border-radius: 5px;
+	font-size: 16px;
+}
 table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 1200px;
   margin: 0 auto;
 }
-
 td, th {
   border: 1px solid #dddddd;
   padding: 8px;
@@ -34,13 +56,20 @@ tr:nth-child(even) {
 </style>
 <body>
 	<h2>🌈 EMP TABLE 🌈</h2>
+	<div id="input_wrap">
+		<input class="input" id="empno" type="text" placeholder="사원번호를 입력하세요."/>
+		<input class="input" id="ename" type="text" placeholder="사원이름을 입력하세요."/>
+		<input class="input" id="job" type="text" placeholder="사원직책을 입력하세요."/>	
+		<input class="input" id="sal" type="text" placeholder="사원급여를 입력하세요."/>
+		<button type="button" onclick="join()">사원 추가</button>
+	</div>
 	<table id="emp">
       <tr>
-        <td id="empno">사원번호</td>
-        <td id="ename">사원이름</td>
-        <td id="job">직업</td>
-        <td id="sal">급여</td>
-        <td id="hiredate">입사날짜</td>
+        <td>사원번호</td>
+        <td>사원이름</td>
+        <td>직업</td>
+        <td>급여</td>
+        <td>입사날짜</td>
       </tr>
     </table>	
 </body>
@@ -48,6 +77,38 @@ tr:nth-child(even) {
     integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
     crossorigin="anonymous"></script>
 <script type="text/javascript">
+
+
+	function join(){
+		var empno = $('#empno').val();
+		var ename = $('#ename').val();
+		var job = $('#job').val();
+		var sal = $('#sal').val();
+		
+		var jsonData = {
+				"empno" : empno,
+				"ename" : ename,
+				"job" : job,
+				"sal" : sal
+		};
+		
+        //AJAX 호출!
+        $.ajax({
+        	url: '/api/v1/emp/join',
+           	type: "POST",
+           	contentType: 'application/json', // 서버에 json 타입으로 보낼 예정(요청)
+           	data: JSON.stringify(jsonData),
+           	dataType: 'json',
+           	success: function (response){
+           		console.log(response);
+           		alert('사원 추가 완료!');
+           		location.reload(); //새로고침
+           	}
+		});
+	}
+
+
+
 
      function callMyAPI(){
         //ajax : 백엔드와 프론트가 통신하는 기능!
@@ -79,6 +140,30 @@ tr:nth-child(even) {
         });   
      }
      callMyAPI();// 함수호출
+         
+ 	/* 쌤 답안
+  	callApi();
+ 	function callApi(){
+ 		$.ajax({
+ 	           url:'/api/v1/emp',
+ 	           type:'GET',
+ 	           dataType : 'json',
+ 	           success : function (response){
+ 	        	   var html = '';
+ 	        	   for(var i=0; i <response.length; i++){
+ 	        		   html += '<tr><td>' + response[i].empno+'</td><td>'
+ 	        		   + response[i].ename+'</td><td>'+response[i].job
+ 	        		   +'</td><td>'+response[i].sal+'</td><td>'
+ 	        		   + response[i].hiredate+'</td></tr>'
+ 	        	   }
+ 	        	   $("#data").append(html);
+ 	          	}
+ 	      }
+ 	}
+  	*/
+
+
+
      </script>
 
 </html>

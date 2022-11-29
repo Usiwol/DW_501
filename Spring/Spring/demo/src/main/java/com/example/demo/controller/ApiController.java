@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.mapper.EmpMapper;
 import com.example.demo.service.ApiService;
+import com.example.demo.vo.DeptVO;
 import com.example.demo.vo.EmpVO;
 import com.example.demo.vo.Login;
 import com.example.demo.vo.Login2;
@@ -179,6 +180,15 @@ public class ApiController {
 		return empMapper.selectEmp();
 	}
 	
+	@GetMapping("/api/v1/dept")
+	public List<DeptVO> callDept(){
+		return empMapper.selectDept();
+	}
+	
+	@PostMapping("/api/v1/emp/join")
+	public int callEmpjoin(@RequestBody EmpVO emp) {
+		return empMapper.insertEmp(emp);
+	}
 	
 	
 }

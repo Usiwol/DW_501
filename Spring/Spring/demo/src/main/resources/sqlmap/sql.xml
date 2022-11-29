@@ -6,4 +6,28 @@
 		SELECT * FROM emp
 	</select>
 	
+	<!-- * : 아스테리크스 -->
+	<select id="selectDept" resultType="com.example.demo.vo.DeptVO">
+		SELECT * FROM dept 
+	</select>
+	
+	<!-- insert, update, delete는 resultType int! -->
+	<!-- default int이기 때문에 resultType 쓸 필요가 없다 -->
+	<insert id="insertEmp">
+		INSERT INTO emp
+		(
+			empno,
+			ename,
+			job,
+			sal
+		)
+		VALUES
+		(
+			#{empno},
+			#{ename},
+			#{job},
+			#{sal}
+		)
+	</insert>
+	
 </mapper>
