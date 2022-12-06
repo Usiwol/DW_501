@@ -1,6 +1,6 @@
 package VO;
 
-public class venture implements Comparable {
+public class venture implements Comparable{
 	private int num;
 	private String company;
 	private String addr;
@@ -9,45 +9,42 @@ public class venture implements Comparable {
 	private String product;
 	
 	public venture() {}
-	public venture(int num, String comp, String addr,
-			String cate, String bs, String pdt) {
-		this.num=num;
-		this.company=comp;
-		this.addr=addr;
-		this.category=cate;
-		this.business_name=bs;
-		this.product=pdt;
+	public venture(int num, String company, String addr, String category, String business_name, String product) {
+		this.num = num;
+		this.company = company;
+		this.addr = addr;
+		this.category = category;
+		this.business_name = business_name;
+		this.product = product;
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		//사용자정의 클래스에서 equals를 구현할 때 어떤 대상을 비교할 것인지 정해야 한다.
-		//그냥 equals 메서드가 동작안하는 이유는 비교대상이 없기 때문에 동작 못하는것
-		//그래서 클래스에 equals를 구현해서 비교대상을 정해줘야 한다.
-		venture tmp = (venture)obj; //타입변환
-		//if(this.num==tmp.num) //번호의 동일성
-		if(this.company.equals(tmp.company))	//주소의 동일성
+//		사용자정의 클래스에서equals를 구현할 때 어떤 대상을 비교할 것인지 정해야 한다.
+//		그냥 equals 메서드가 동작 안하는 이유는 비교대상이 없기 때문에 동작 못하는 것
+// 		그래서 클래스에서 equals를 구현해서 비교하는 것
+		venture tmp = (venture)obj;
+		System.out.println(this.company);
+//		if(this.num == tmp.num)
+//			return true;
+		if(this.company.equals(tmp.company))
 			return true;
 		return false;
 	}
 	
 	@Override
-	public int compareTo(Object o) { //추상메서드 만들기
-
-		return this.company.compareTo(((venture)o).company);
+	public int compareTo(Object o) {
+		venture tmp = (venture)o;
+		return this.company.compareTo(tmp.company);
 	}
-	
 	@Override
 	public int hashCode() {
-		return this.addr.hashCode();
+		return this.company.hashCode();
 	}
-	
 	@Override
 	public String toString() {
-		return num+" "+company+" "+addr+" "+category+" "+business_name+" "+product;
+		return num + " " + company + " " + addr + " " + category + " " + business_name +" "+ product;
 	}
-	
-	
 	public int getNum() {
 		return num;
 	}
@@ -84,7 +81,5 @@ public class venture implements Comparable {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-	
-	
 	
 }
