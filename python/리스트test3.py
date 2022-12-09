@@ -1,5 +1,6 @@
 import random
 
+
 '''
 name=["김유신","이순신","어영담","이성계","장영실","홍길동","김지연","김춘추"]
 job=["군인","국회의원","과학자","도둑","건설업자","밸리댄서","변호사"]
@@ -62,7 +63,7 @@ for 개인 in info:
         age20.append(개인[1])
 
 print(age20) # for문이 끝나고 도출
-'''
+
 
 # 랜덤 사용방법
 # random.randint(1,40) - > 1~40 중에서 랜덤
@@ -105,3 +106,27 @@ for i in a:
         if num in c:
             num.append(i)
 print(num)
+'''
+
+word=["boy","table","book","girl","interest","linit","endless","mission",
+    "hopi","tigerprint"]
+
+eng=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r",
+    "s","t","u","v","w","x","y","z"]
+
+
+# eng 리스트의 알파벳을 무작위 조합해서 word 리스트의 단어 중 1개 이상 나오는경우
+# 몇번째 조합에서 나오는지 출력
+
+s = ''
+cnt = 0
+
+while True:
+    cnt += 1
+    l =random.randint(3,10)
+    for i in range(l):
+        s += random.choice(eng)
+    if s in word:
+        break
+    s = ''
+print(s+"가 생성되기까지의 횟수 : "+str(cnt))
