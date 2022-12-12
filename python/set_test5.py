@@ -33,14 +33,14 @@ set4.add("김진연은") # add 새로운 데이터 추가
 print(set4)
 
 set5 = {"안경을 쓰고 있다.","그래서","겨울에는 장님이 된다"} #다른 set이 가지고 있는 데이터를 업로드 할 수 있다.
-set.update(set5)
+set4.update(set5)
 print(set5)
 list1 = ["장영주는","화가많다"] # list에 있는 데이터를 set에 추가 가능
 set4.update(list1) # 리스트뿐 아니라 튜플,딕셔너리도 가능!
 print(set4)
 
 # set 데이터 삭제하기
-set5.remove("그래서") # remove는 삭제 데이터가 없으면 오류 발생
+set4.remove("그래서") # remove는 삭제 데이터가 없으면 오류 발생
 print(set4)
 set4.discard("장영주는") #discard는 삭제 데이터가 없으면 오류 no
 print(set4)
