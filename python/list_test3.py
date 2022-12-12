@@ -130,3 +130,16 @@ while True:
         break
     s = ''
 print(s+"가 생성되기까지의 횟수 : "+str(cnt))
+
+cnt = 0
+temp = ''
+while True:
+    word_cnt = random.randint(3,10);
+    temp=""
+    for i in range(word_cnt):
+        temp += random.choice(eng)
+    cnt+=1
+    if temp in word:
+        break
+
+print(temp+"  "+str(cnt))
