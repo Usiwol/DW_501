@@ -31,13 +31,10 @@ public class MemberController {
 			//System.out.println("이름은 :" + m.getName());
 			HttpSession session = request.getSession(); //세션불러오기
 			session.setAttribute("userId", m.getUserId()); //세션에 사용자 아이디 저장
-
 				return true;
-		}else
-	{
-		return false;
-	}
-
+		}else{
+			return false;
+		}
    }
 	
 	//전체 조회
