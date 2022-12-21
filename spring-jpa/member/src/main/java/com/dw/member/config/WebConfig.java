@@ -1,13 +1,13 @@
 package com.dw.member.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
+// import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 //WebConfig : 웹 설정
 //Config : 설정
-@Configuration
+// @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
