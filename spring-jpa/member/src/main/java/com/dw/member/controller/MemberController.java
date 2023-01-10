@@ -35,7 +35,7 @@ public class MemberController {
 	MainService service;
 
 	// 전체 조회
-	@GetMapping("/member")
+	@GetMapping("/api/v1/member")
 	public APIResponse<List<Member>> callAllMembers() {
 		// findAll == select * from <테이블 이름>
 		List<Member> list = repo.findAll();

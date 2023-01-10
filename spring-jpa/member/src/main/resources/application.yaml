@@ -1,3 +1,9 @@
+aws:
+  s3:
+    access-id:
+    access-pw:
+    bucket:
+
 ## MYSQL
 spring:
   datasource:
@@ -10,7 +16,7 @@ spring:
     generate-ddl: true
     ddl-auto: update
     show-sql: true
-    format_sql: true
+    # format_sql: true
     # h2:
     # console:
     #   enabled: true
