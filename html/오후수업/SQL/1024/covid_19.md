@@ -6,7 +6,7 @@
 
 # 엔티티 관계도
 <div align=center>  
-<img src="IMAGE/엔티티관계도.jpg" width="500">
+<img src="../IMAGE/엔티티관계도.jpg" width="500">
 </div> 
 <br>
 
