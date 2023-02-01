@@ -1,4 +1,4 @@
-# 영화사이트
+# JH NETFLIX 😎
 
 <div align=center> 
 <img src="image/net.png" width="600">
